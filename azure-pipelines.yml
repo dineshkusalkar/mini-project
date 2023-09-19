@@ -38,7 +38,7 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/$(Build. SourceBranchName)/terraform_files
+          cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform_files
           terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
           terraform plan 
           terraform apply --auto-approve
@@ -52,7 +52,7 @@ stages:
       inputs:
             targetType: 'inline'
             script: |
-              cd $(System.DefaultWorkingDirectory)/$(Build. SourceBranchName)/kubernetes
+              cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
               az aks get-credentials --resource-group mini-project-master --name AKS-master --overwrite-existing
               export new_test=$(test)
               envsubst < secretsproviderclass.yaml > secretsproviderclass-new.yaml
