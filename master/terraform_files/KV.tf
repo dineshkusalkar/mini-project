@@ -24,6 +24,7 @@ resource "azurerm_key_vault" "AKV" {
     key_permissions = [
       "Create",
       "Get",
+      "List"
     ]
 
     secret_permissions = [
@@ -31,7 +32,8 @@ resource "azurerm_key_vault" "AKV" {
       "Get",
       "Delete",
       "Purge",
-      "Recover"
+      "Recover",
+      "List"
     ]
   }
 
