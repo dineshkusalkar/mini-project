@@ -50,7 +50,7 @@ data "azuread_service_principal" "example-app" {
 
 resource "azurerm_role_assignment" "ara" {
   scope                            = azurerm_key_vault.AKV.id
-  role_definition_name             = "Contributor"
+  role_definition_name             = "Owner"
   principal_id                     = data.azuread_service_principal.example-app.object_id
   skip_service_principal_aad_check = true
   depends_on = [azurerm_key_vault.AKV]
