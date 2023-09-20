@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: web-app
-        image: dineshmk/node-app:latest
+        image: dineshmk/node-app:latest1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -45,4 +45,4 @@ spec:
           driver: secrets-store.csi.k8s.io
           readOnly: true
           volumeAttributes:
-            secretProviderClass: azure-kvname
+            secretProviderClass: azure-kvname-qa
