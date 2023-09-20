@@ -4,10 +4,10 @@
 data "azurerm_client_config" "current" {}
 
 
-resource "azurerm_key_vault" "AKV" {
-  name                       = "kvdinesh007-QA"
+resource "azurerm_key_vault" "AKV-qa" {
+  name                       = "kvdinesh007-QAA"
   location                   = var.location
-  resource_group_name        = azurerm_resource_group.mini-project.name
+  resource_group_name        = azurerm_resource_group.mini-project-qa.name
   tenant_id                  = data.azurerm_client_config.current.tenant_id
   sku_name                   = "standard" 
   soft_delete_retention_days = 7
@@ -15,7 +15,7 @@ resource "azurerm_key_vault" "AKV" {
 
 
   
-  depends_on = [azurerm_kubernetes_cluster.aks]
+  depends_on = [azurerm_kubernetes_cluster.aks-qa]
 
   access_policy {
      tenant_id = data.azurerm_client_config.current.tenant_id
@@ -48,20 +48,20 @@ data "azuread_service_principal" "example-app" {
   # az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/dc272485-d2da-4a98-8171-00ce402c7324" --name example-app
 }
 
-resource "azurerm_role_assignment" "ara" {
-  scope                            = azurerm_key_vault.AKV.id
+resource "azurerm_role_assignment" "ara-qa" {
+  scope                            = azurerm_key_vault.AKV-qa.id
   role_definition_name             = "Contributor"
   principal_id                     = data.azuread_service_principal.example-app.object_id
   skip_service_principal_aad_check = true
-  depends_on = [azurerm_key_vault.AKV]
+  depends_on = [azurerm_key_vault.AKV-qa]
 }
 
 
-resource "azurerm_key_vault_access_policy" "example-app-principal" {
-  key_vault_id = azurerm_key_vault.AKV.id
+resource "azurerm_key_vault_access_policy" "example-app-principal-qa" {
+  key_vault_id = azurerm_key_vault.AKV-qa.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
   object_id    = data.azuread_service_principal.example-app.object_id
-  depends_on = [azurerm_key_vault.AKV]
+  depends_on = [azurerm_key_vault.AKV-qa]
   key_permissions = [
     "Get", "List", "Encrypt", "Decrypt", "Delete"
   ]
@@ -80,18 +80,18 @@ resource "azurerm_key_vault_access_policy" "example-app-principal" {
 
 
 resource "azurerm_role_assignment" "ara2" {
-  scope                = azurerm_key_vault.AKV.id
+  scope                = azurerm_key_vault.AKV-qa.id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  principal_id         = azurerm_kubernetes_cluster.aks-qa.kubelet_identity[0].object_id
   skip_service_principal_aad_check = true
-  depends_on = [azurerm_key_vault.AKV]
+  depends_on = [azurerm_key_vault.AKV-qa]
 }
 
 resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
-  key_vault_id = azurerm_key_vault.AKV.id
+  key_vault_id = azurerm_key_vault.AKV-qa.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id #"c253a12a-6063-4235-ac8f-bbee8250f034"   #"67ff6ee4-0312-4d04-9356-78cec1708c1d" # AKS-Agent POOl object ID userAssignedIdentityID
-  depends_on = [azurerm_key_vault.AKV]
+  object_id    = azurerm_kubernetes_cluster.aks-qa.kubelet_identity[0].object_id #"c253a12a-6063-4235-ac8f-bbee8250f034"   #"67ff6ee4-0312-4d04-9356-78cec1708c1d" # AKS-Agent POOl object ID userAssignedIdentityID
+  depends_on = [azurerm_key_vault.AKV-qa]
   key_permissions = [
     "Get", "List", "Encrypt", "Decrypt", "Delete"
   ] 
