@@ -22,13 +22,13 @@ stages:
     steps:
     - checkout: self
     
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'docker'
-        repository: 'dineshmk/node-app'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: '$(IMAGE_NAME)'
+    # - task: Docker@2
+    #   inputs:
+    #     containerRegistry: 'docker'
+    #     repository: 'dineshmk/node-app'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '**/Dockerfile'
+    #     tags: '$(IMAGE_NAME)'
   
     
     - task: AzureCLI@2
