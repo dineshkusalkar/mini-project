@@ -3,12 +3,9 @@ trigger:
   branches:
     include:
     - master
-    
-
 
 pr: none
 
-  
 pool:
   name: Agent001
 
@@ -16,12 +13,18 @@ stages:
 - stage: Build
   displayName: 'Build Docker image'
   jobs:
-  - job: BuildJob
-    displayName: 'Build and Pushes'
+  - job: BuildAndPushDocker
+    pool:
+      name: Agent001
     steps:
-    - checkout: self
-    
-    
+   
+    - script: |
+       
+
+        # Copy the appropriate 'app.py' based on the environment
+        cd $(System.DefaultWorkingDirectory)
+        cp app-$(Build.SourceBranchName).py app.py
+      displayName: 'Prepare app.py'
     - task: Docker@2
       inputs:
         containerRegistry: 'docker'
@@ -29,8 +32,11 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(IMAGE_NAME)'
-   
-    
+
+    # env:
+    #   KEYVAULT_URL_QA: https://kvdinesh007-qa.vault.azure.net/
+    #   KEYVAULT_URL_PROD: https://kvdinesh007-prod.vault.azure.net/
+
     - task: AzureCLI@2
       name: terraformApply
       inputs:
@@ -47,23 +53,19 @@ stages:
           echo $client_id
           echo "##vso[task.setvariable variable=test]$client_id"
           echo $(test)
-    
     - task: Bash@3
       inputs:
-            targetType: 'inline'
-            script: |
-              cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
-              az aks get-credentials --resource-group mini-project-QA --name AKS-QA --overwrite-existing
-              export new_test=$(test)
-              envsubst < secretsproviderclass.yaml > secretsproviderclass-new.yaml
-              kubectl apply -f secretsproviderclass-new.yaml
-              kubectl apply -f webapp-deployment.yaml
-              kubectl apply -f webapp-service.yaml
-              kubectl apply -f db-deployment.yaml
-              kubectl apply -f db-service.yaml
-              kubectl apply -f hpaweb.yaml
-              cat secretsproviderclass-new.yaml
-              cat webapp-deployment.yaml
-              
-
-            
+        targetType: 'inline'
+        script: |
+          cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
+          az aks get-credentials --resource-group mini-project-QA --name AKS-QA --overwrite-existing
+          export new_test=$(test)
+          envsubst < secretsproviderclass.yaml > secretsproviderclass-new.yaml
+          kubectl apply -f secretsproviderclass-new.yaml
+          kubectl apply -f webapp-deployment.yaml
+          kubectl apply -f webapp-service.yaml
+          kubectl apply -f db-deployment.yaml
+          kubectl apply -f db-service.yaml
+          kubectl apply -f hpaweb.yaml
+          cat secretsproviderclass-new.yaml
+          cat webapp-deployment.yaml
