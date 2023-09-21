@@ -59,7 +59,7 @@ stages:
         targetType: 'inline'
         script: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
-          az aks get-credentials --resource-group mini-project-QA --name AKS-QA --overwrite-existing
+          az aks get-credentials --resource-group mini-project-PROD --name AKS-PROD --overwrite-existing
           export new_test=$(test)
           envsubst < secretsproviderclass.yaml > secretsproviderclass-new.yaml
           kubectl apply -f secretsproviderclass-new.yaml
