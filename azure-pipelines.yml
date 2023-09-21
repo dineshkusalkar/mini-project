@@ -32,7 +32,7 @@ stages:
         repository: 'dineshmk/node-app'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        #tags: '$(IMAGE_NAME)'
+        tags: '$latest'
 
     # env:
     #   KEYVAULT_URL_QA: https://kvdinesh007-qa.vault.azure.net/
