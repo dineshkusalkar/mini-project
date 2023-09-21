@@ -19,7 +19,7 @@ secret_name_db_password = 'user-password'
 # Initialize Azure Key Vault client using client secret credentials
 # Function to retrieve secrets from Azure Key Vault
 def get_secret(secret_name):
-    key_vault_url = "https://kvdinesh007-prod.vault.azure.net"
+    key_vault_url = "https://kvdinesh007-qa.vault.azure.net"
 
     credential = ClientSecretCredential(  # below details are reffer from {example-app} service principle
         tenant_id='62c65783-e48b-4438-8d2a-50fb84685b6e',
