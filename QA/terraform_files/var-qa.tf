@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   type        = string
   description = "RG name in Azure"
-  default     = "mini-project-QA"
+  default     = "mini-project"
 }
 variable "location" {
   type        = string
@@ -11,7 +11,7 @@ variable "location" {
 variable "cluster_name" {
   type        = string
   description = "AKS name in Azure"
-  default     = "AKS-QA"
+  default     = "AKS"
 }
 variable "kubernetes_version" {
   type        = string
