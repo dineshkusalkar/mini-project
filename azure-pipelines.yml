@@ -19,20 +19,20 @@ stages:
       name: Agent001
     steps:
    
-    - script: |
+    # - script: |
        
 
-        # Copy the appropriate 'app.py' based on the environment
-        cd $(System.DefaultWorkingDirectory)
-        cp app-$(Build.SourceBranchName).py app.py
-      displayName: 'Prepare app.py'
+    #     # Copy the appropriate 'app.py' based on the environment
+    #     cd $(System.DefaultWorkingDirectory)
+    #     cp app-$(Build.SourceBranchName).py app.py
+    #   displayName: 'Prepare app.py'
     - task: Docker@2
       inputs:
         containerRegistry: 'docker'
         repository: 'dineshmk/node-app'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags: 'latest'
+        tags: '$(Build.SourceBranchName)'
 
     # env:
     #   KEYVAULT_URL_QA: https://kvdinesh007-qa.vault.azure.net/
