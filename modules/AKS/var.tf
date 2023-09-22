@@ -3,3 +3,9 @@ variable "resource_group_name" {
   description = "RG name in Azure"
   default     = "mini-project"
 }
+
+variable "cluster_name" {
+  type        = string
+  description = "AKS name in Azure"
+  default     = "AKS"
+}
