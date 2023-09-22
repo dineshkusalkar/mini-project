@@ -15,10 +15,7 @@ provider "azurerm" {
   features {}
 }
 
-module "RG"{
-    source = "./modules/RG"
-    
-}
+
 
 module "AKS"{
     source = "./modules/AKS"
