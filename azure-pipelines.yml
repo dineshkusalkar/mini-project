@@ -10,14 +10,14 @@ pr: none
 pool:
   name: Agent001
 
-# stages:
-# - stage: Build
-#   displayName: 'Build Docker image'
-#   jobs:
-#   - job: BuildAndPushDocker
-#     pool:
-#       name: Agent001
-#     steps:
+stages:
+- stage: Build
+  displayName: 'Build Docker image'
+  jobs:
+  - job: BuildAndPushDocker
+    pool:
+      name: Agent001
+    steps:
    
     # - script: |
        
