@@ -1,4 +1,5 @@
-modules "QA"
+module "QA"
 {
-    source="./modules/main.tf"
+    source="./QA/terraform_files"
+    
 }
