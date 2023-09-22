@@ -27,8 +27,11 @@ module "AKS"{
 
 module "AKV"{
     source = "./modules/AKV"
-    
+    name = "kvdinesh007-QA"
+    resource_group_name = "mini-project-QA"
+
 }
+
 
 module "secrets"{
     source = "./modules/secrets"
