@@ -1,13 +1,13 @@
-resource "azurerm_resource_group" "mini-project-qa" {
-  name     = "${var.resource_group_name}-QA"
+resource "azurerm_resource_group" "mini-project" {
+  name     = var.resource_group_name
   location = var.location
 
 }
 
 
 
-resource "azurerm_kubernetes_cluster" "aks-qa" {
-  name                = "${var.cluster_name}-QA"
+resource "azurerm_kubernetes_cluster" "aks" {
+  name                = var.cluster_name
   kubernetes_version  = var.kubernetes_version
   location            = var.location
   resource_group_name = azurerm_resource_group.mini-project-qa.name
@@ -44,10 +44,7 @@ resource "azurerm_kubernetes_cluster" "aks-qa" {
 
 }
 
-/*output "kubelet_identity_object_id" {
-  description = "The `azurerm_kubernetes_cluster`'s `kubelet_identity` block."
-  value       = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
-}*/
+
 
 
 output "kubelet_identity_client_id" {
