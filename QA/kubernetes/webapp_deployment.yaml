@@ -22,6 +22,8 @@ spec:
         env:
         - name: DB_HOST
           value: db-server
+        - name: key_vault_url
+          value: ""  
         - name: DB_PORT
           value: "3306"
         - name: DB_NAME
