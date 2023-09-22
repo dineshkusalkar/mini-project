@@ -1,5 +1,5 @@
 module "QA"
 {
-    source="./QA/terraform_files"
+    source="./master/terraform_files"
     
 }
