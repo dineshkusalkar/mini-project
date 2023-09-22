@@ -6,17 +6,6 @@ provider "azurerm" {
 
 }
 
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "3.71.0"
-    }
-  }
-}
-
-
-
 # Keep the terraform state file at a centralised location
 # here i created storage account manually and provide details in backend block
 terraform {
