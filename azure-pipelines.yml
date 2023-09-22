@@ -34,9 +34,7 @@ stages:
         Dockerfile: '**/Dockerfile'
         tags: '$(Build.SourceBranchName)'
 
-    # env:
-    #   KEYVAULT_URL_QA: https://kvdinesh007-qa.vault.azure.net/
-    #   KEYVAULT_URL_PROD: https://kvdinesh007-prod.vault.azure.net/
+   
 
     - task: AzureCLI@2
       name: terraformApply
