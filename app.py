@@ -16,19 +16,19 @@ secret_name_db_username = 'username'
 secret_name_db_password = 'user-password'
 
 
-environment = os.getenv("ENVIRONMENT")
+# environment = os.getenv("ENVIRONMENT")
 
-if environment == "QA":
-    keyvault_url = os.getenv("https://kvdinesh007-qa.vault.azure.net")
-elif environment == "PROD":
-    keyvault_url = os.getenv("https://kvdinesh007-prod.vault.azure.net")
-else:
-    raise ValueError("Invalid environment specified")
+# if environment == "QA":
+#     keyvault_url = os.getenv("https://kvdinesh007-qa.vault.azure.net")
+# elif environment == "PROD":
+#     keyvault_url = os.getenv("https://kvdinesh007-prod.vault.azure.net")
+# else:
+#     raise ValueError("Invalid environment specified")
 
 # Initialize Azure Key Vault client using client secret credentials
 # Function to retrieve secrets from Azure Key Vault
 def get_secret(secret_name):
-    key_vault_url = ${keyvault_url}
+    key_vault_url = os.getenv("keyvault_url")
 
     credential = ClientSecretCredential(  # below details are reffer from {example-app} service principle
         tenant_id='62c65783-e48b-4438-8d2a-50fb84685b6e',
