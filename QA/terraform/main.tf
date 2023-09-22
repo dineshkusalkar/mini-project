@@ -18,7 +18,7 @@ provider "azurerm" {
 
 
 module "AKS"{
-    source = "./modules/AKS/"
+    source = "mini-project/modules/AKS/"
     resource_group_name = "mini-project-QA"
     cluster_name = "AKS-QA"
 
@@ -26,7 +26,7 @@ module "AKS"{
 }
 
 module "AKV"{
-    source = "./modules/AKV/"
+    source = "mini-project/modules/AKV/"
     name = "kvdinesh007-QA"
     resource_group_name = "mini-project-QA"
 
@@ -34,6 +34,6 @@ module "AKV"{
 
 
 module "secrets"{
-    source = "./modules/secrets/"
+    source = "mini-project/modules/secrets/"
     
 }
