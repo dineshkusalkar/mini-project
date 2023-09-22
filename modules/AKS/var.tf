@@ -10,6 +10,11 @@ variable "cluster_name" {
   default     = "AKS"
 }
 
+variable "location" {
+  type        = string
+  description = "Resources location in Azure"
+  default     = "eastus"
+}
 
 variable "kubernetes_version" {
   type        = string
