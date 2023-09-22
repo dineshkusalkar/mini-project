@@ -22,7 +22,7 @@ spec:
         env:
         - name: DB_HOST
           value: db-server
-        - name: key_vault_url
+        - name: keyvault_url
           value: "https://kvdinesh007-qa.vault.azure.net"  
         - name: DB_PORT
           value: "3306"
