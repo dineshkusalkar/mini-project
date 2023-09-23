@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "mini-project-qa" {
-  name     = var.resource_group_name
+  name     = "${var.resource_group_name}-QA"
   location = var.location
 
 }
@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "mini-project-qa" {
 
 
 resource "azurerm_kubernetes_cluster" "aks-qa" {
-  name                = var.cluster_name
+  name                = "${var.cluster_name}-QA"
   kubernetes_version  = var.kubernetes_version
   location            = var.location
   resource_group_name = azurerm_resource_group.mini-project-qa.name

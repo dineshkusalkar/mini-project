@@ -1,3 +1,4 @@
+
 trigger:
   batch: true
   branches:
@@ -32,11 +33,9 @@ stages:
         repository: 'dineshmk/node-app'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags: 'latest'
+        tags: '$(Build.SourceBranchName)'
 
-    # env:
-    #   KEYVAULT_URL_QA: https://kvdinesh007-qa.vault.azure.net/
-    #   KEYVAULT_URL_PROD: https://kvdinesh007-prod.vault.azure.net/
+   
 
     - task: AzureCLI@2
       name: terraformApply
@@ -45,7 +44,7 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform_files
+          cd $(System.DefaultWorkingDirectory)/terraform
           terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
           terraform plan 
           terraform apply --auto-approve
@@ -54,19 +53,20 @@ stages:
           echo $client_id
           echo "##vso[task.setvariable variable=test]$client_id"
           echo $(test)
+
     - task: Bash@3
       inputs:
         targetType: 'inline'
         script: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
-          az aks get-credentials --resource-group mini-project-PROD --name AKS-PROD --overwrite-existing
+          az aks get-credentials --resource-group mini-project-QA --name AKS-QA --overwrite-existing
           export new_test=$(test)
-          envsubst < secretsproviderclass.yaml > secretsproviderclass-new.yaml
-          kubectl apply -f secretsproviderclass-new.yaml
-          kubectl apply -f webapp-deployment.yaml
-          kubectl apply -f webapp-service.yaml
-          kubectl apply -f db-deployment.yaml
-          kubectl apply -f db-service.yaml
-          kubectl apply -f hpaweb.yaml
-          cat secretsproviderclass-new.yaml
-          cat webapp-deployment.yaml
+          envsubst < secretsprovider_class.yaml > secretsprovider_class-new.yaml
+          kubectl apply -f secretsprovider_class-new.yaml
+          kubectl apply -f webapp_deployment.yaml
+          kubectl apply -f webapp_service.yaml
+          kubectl apply -f db_deployment.yaml
+          kubectl apply -f db_service.yaml
+          kubectl apply -f hpa_web.yaml
+          cat secretsprovider_class-new.yaml
+          cat webapp_deployment.yaml
