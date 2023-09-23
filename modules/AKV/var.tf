@@ -16,3 +16,15 @@ variable "resource_group_name" {
   description = "RG name in Azure"
   default     = "mini-project"
 }
+
+variable "object_id" {
+  type        = string
+  
+  
+}
+
+variable "principal_id" {
+  type        = string
+ 
+  
+}
