@@ -33,7 +33,7 @@ stages:
         repository: 'dineshmk/node-app'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags: '$(Build.SourceBranchName)'
+        tags: 'latest'
 
    
 
