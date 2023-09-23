@@ -21,19 +21,23 @@ module "AKS"{
     source = "../modules/AKS/"
     resource_group_name = "mini-project-QA"
     cluster_name = "AKS-QA"
+   
 
-
+    # output "kubelet_identity_object_id" {
+    #   description = "The `azurerm_kubernetes_cluster`'s `kubelet_identity` block."
+    #   value       = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+    # }
 }
+
+
 
 module "AKV"{
     source = "../modules/AKV/"
     name = "kvdinesh007-QA"
-    resource_group_name = "mini-project-QA"
+    resource_group_name = module.AKS.resource_group_name
+    principal_id = module.AKS.kubelet_identity_object_id
+    object_id = module.AKS.kubelet_identity_object_id
 
 }
 
 
-module "secrets"{
-    source = "../modules/secrets/"
-    
-}
