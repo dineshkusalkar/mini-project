@@ -15,7 +15,7 @@ resource "azurerm_key_vault" "AKV" {
 
 
   
-  depends_on = [azurerm_kubernetes_cluster.aks]
+ #  depends_on = [azurerm_kubernetes_cluster.aks]
 
   access_policy {
      tenant_id = data.azurerm_client_config.current.tenant_id
@@ -78,7 +78,8 @@ resource "azurerm_key_vault_access_policy" "example-app-principal" {
 resource "azurerm_role_assignment" "ara2" {
   scope                = azurerm_key_vault.AKV.id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  principal_id         = var.principal_id  # azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+    
   skip_service_principal_aad_check = true
   depends_on = [azurerm_key_vault.AKV]
 }
@@ -86,7 +87,7 @@ resource "azurerm_role_assignment" "ara2" {
 resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
   key_vault_id = azurerm_key_vault.AKV.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id 
+  object_id    = var.object_id   # azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
   depends_on = [azurerm_key_vault.AKV]
   key_permissions = [
     "Get", "List", "Encrypt", "Decrypt", "Delete"
@@ -104,3 +105,26 @@ resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
   
 } 
 
+resource "azurerm_key_vault_secret" "secret1" {
+  name         = "username"
+  value        = "dinesh"
+  key_vault_id = azurerm_key_vault.AKV.id
+  depends_on   = [azurerm_key_vault.AKV]
+
+}
+
+resource "azurerm_key_vault_secret" "secret2" {
+  name         = "user-password"
+  value        = "Banglore#1998"
+  key_vault_id = azurerm_key_vault.AKV.id
+  depends_on   = [azurerm_key_vault.AKV]
+
+}
+
+resource "azurerm_key_vault_secret" "secret3" {
+  name         = "root-password"
+  value        = "Maharashtra1998@"
+  key_vault_id = azurerm_key_vault.AKV.id
+  depends_on   = [azurerm_key_vault.AKV]
+
+}
