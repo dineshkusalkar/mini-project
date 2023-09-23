@@ -10,7 +10,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   name                = var.cluster_name
   kubernetes_version  = var.kubernetes_version
   location            = var.location
-  resource_group_name = azurerm_resource_group.mini-project-qa.name
+  resource_group_name = azurerm_resource_group.mini-project.name
   dns_prefix          = var.cluster_name
 
 
@@ -44,11 +44,18 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 }
 
-
+ output "kubelet_identity_object_id" {
+      description = "The `azurerm_kubernetes_cluster`'s `kubelet_identity` block."
+      value       = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+    }
 
 
 output "kubelet_identity_client_id" {
   description = "The `azurerm_kubernetes_cluster`'s `kubelet_identity` block."
-  value       = azurerm_kubernetes_cluster.aks-qa.kubelet_identity[0].client_id
+  value       = azurerm_kubernetes_cluster.aks.kubelet_identity[0].client_id
 }
 
+output "resource_group_name" {
+  
+  value       = azurerm_resource_group.mini-project.name
+}
