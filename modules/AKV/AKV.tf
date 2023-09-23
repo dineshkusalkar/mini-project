@@ -79,7 +79,7 @@ resource "azurerm_key_vault_access_policy" "example-app-principal" {
 }
 
 
-resource "azurerm_role_assignment" "ara2-prod" {
+resource "azurerm_role_assignment" "ara2" {
   scope                = azurerm_key_vault.AKV.id
   role_definition_name = "Contributor"
   principal_id         = var.principal_id  # azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
@@ -88,7 +88,7 @@ resource "azurerm_role_assignment" "ara2-prod" {
   depends_on = [azurerm_key_vault.AKV]
 }
 
-resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal-prod" {
+resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
   key_vault_id = azurerm_key_vault.AKV.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
   object_id    = var.object_id   # azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
