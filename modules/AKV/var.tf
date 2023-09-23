@@ -28,3 +28,9 @@ variable "principal_id" {
  
   
 }
+
+variable "cluster_name" {
+  type        = string
+ 
+  
+}
