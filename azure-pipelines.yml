@@ -20,13 +20,14 @@ stages:
       name: Agent001
     steps:
    
-    - script: |
+    # - script: |
        
 
-        # Copy the appropriate 'app.py' based on the environment
-        cd $(System.DefaultWorkingDirectory)
-        cp app-$(Build.SourceBranchName).py app.py
-      displayName: 'Prepare app.py'
+    #     # Copy the appropriate 'app.py' based on the environment
+    #     cd $(System.DefaultWorkingDirectory)
+    #     cp app-$(Build.SourceBranchName).py app.py
+    #   displayName: 'Prepare app.py'
+    
     - task: Docker@2
       inputs:
         containerRegistry: 'docker'
@@ -37,22 +38,22 @@ stages:
 
    
 
-    - task: AzureCLI@2
-      name: terraformApply
-      inputs:
-        azureSubscription: 'azure'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/terraform
-          terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
-          terraform plan 
-          terraform apply --auto-approve
-          terraform apply -refresh-only -auto-approve
-          client_id=$(terraform output kubelet_identity_client_id)
-          echo $client_id
-          echo "##vso[task.setvariable variable=test]$client_id"
-          echo $(test)
+    # - task: AzureCLI@2
+    #   name: terraformApply
+    #   inputs:
+    #     azureSubscription: 'azure'
+    #     scriptType: 'bash'
+    #     scriptLocation: 'inlineScript'
+    #     inlineScript: |
+    #       cd $(System.DefaultWorkingDirectory)/terraform
+    #       terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
+    #       terraform plan 
+    #       terraform apply --auto-approve
+    #       terraform apply -refresh-only -auto-approve
+    #       client_id=$(terraform output kubelet_identity_client_id)
+    #       echo $client_id
+    #       echo "##vso[task.setvariable variable=test]$client_id"
+    #       echo $(test)
 
     - task: Bash@3
       inputs:
