@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: web-app
-        image: dineshmk/node-app:QA
+        image: dineshmk/node-app:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
