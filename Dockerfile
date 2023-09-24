@@ -10,6 +10,7 @@ RUN pip install flask_sqlalchemy
 RUN pip install mysql-connector-python gunicorn
 RUN pip install azure.identity
 RUN pip install azure.keyvault.secrets
+RUN pip install python-dotenv
 
 COPY . .
 
