@@ -13,27 +13,36 @@ terraform {
 
 provider "azurerm" {
   features {}
+  client_id       = "fbc85d1a-63e6-43b1-b528-35f30e561182"
+  client_secret   = "56-8Q~fiieMS4OtiiCHRBAzXfQgrlaeq3wVTobA_"
+  tenant_id       = "62c65783-e48b-4438-8d2a-50fb84685b6e"
+  subscription_id = "dc272485-d2da-4a98-8171-00ce402c7324"
 }
 
 
 
 module "AKS"{
-    source = "./mini-project/modules/AKS/"
+    source = "../modules/AKS/"
     resource_group_name = "mini-project-QA"
     cluster_name = "AKS-QA"
-
-
+  
 }
+
+
 
 module "AKV"{
-    source = "./mini-project/modules/AKV/"
+    source = "../modules/AKV/"
     name = "kvdinesh007-QA"
-    resource_group_name = "mini-project-QA"
+    cluster_name = "AKS-QA"
+    resource_group_name = module.AKS.resource_group_name
+    principal_id = module.AKS.kubelet_identity_object_id
+    object_id = module.AKS.kubelet_identity_object_id
 
 }
 
 
-module "secrets"{
-    source = "./mini-project/modules/secrets/"
-    
+
+output "kubelet_identity_client_id" {
+  value = module.AKS.kubelet_identity_client_id
+  
 }
