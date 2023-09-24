@@ -22,7 +22,7 @@ provider "azurerm" {
 
 
 module "AKS"{
-    source =  "./mini-project/modules/AKS"       #"../modules/AKS/"
+    source =  "./../AKS"       #"../modules/AKS/"
     resource_group_name = "mini-project-QA"
     cluster_name = "AKS-QA"
   
