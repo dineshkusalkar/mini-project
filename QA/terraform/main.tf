@@ -31,7 +31,7 @@ module "AKS"{
 
 
 module "AKV"{
-    source = "./mini-project/modules/AKV"       #"../modules/AKV/"
+    source = "../modules/AKV/"       #"../modules/AKV/"
     name = "kvdinesh007-QA"
     cluster_name = "AKS-QA"
     resource_group_name = module.AKS.resource_group_name
