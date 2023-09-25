@@ -20,6 +20,8 @@ spec:
         - containerPort: 80
           name: web-app
         env:
+        - name: keyvault_url
+          value: "https://kvdinesh007-prod.vault.azure.net"  
         - name: DB_HOST
           value: db-server
         - name: DB_PORT
