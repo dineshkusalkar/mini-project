@@ -38,7 +38,7 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/terraform
+          cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
           terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
           terraform plan 
           terraform apply --auto-approve
