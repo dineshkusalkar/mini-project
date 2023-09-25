@@ -9,3 +9,9 @@ variable "cluster_name" {
   description = "AKS name in Azure"
   default     = "AKS-PROD"
 }
+
+variable "name" {
+  type        = string
+  description = "Resources location in Azure"
+  default     = "kvdinesh007-PROD"
+}
