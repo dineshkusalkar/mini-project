@@ -23,7 +23,7 @@ provider "azurerm" {
 
 module "AKS"{
     source =  "../../modules/AKS/"      
-    resource_group_name = "$RESOURCE_GROUP"      #"mini-project-PROD"
+    resource_group_name = "mini-project-PROD"
     cluster_name = "AKS-PROD"
   
 }
