@@ -5,7 +5,7 @@ terraform {
     resource_group_name  = "backend-statefile"
     storage_account_name = "terraformstate1998"
     container_name       = "backend"
-    key                  = "terraform.tfstate"
+    key                  = "terraform-qa.tfstate"
 
   }
 }
@@ -22,7 +22,7 @@ provider "azurerm" {
 
 
 module "AKS"{
-    source =  "../modules/AKS/"       #"../modules/AKS/"
+    source =  "../../modules/AKS/"       #"../modules/AKS/"
     resource_group_name = "mini-project-QA"
     cluster_name = "AKS-QA"
   
@@ -31,12 +31,13 @@ module "AKS"{
 
 
 module "AKV"{
-    source = "../modules/AKV/"       #"../modules/AKV/"
+    source = "../../modules/AKV/"       #"../modules/AKV/"
     name = "kvdinesh007-QA"
     cluster_name = "AKS-QA"
     resource_group_name = module.AKS.resource_group_name
     principal_id = module.AKS.kubelet_identity_object_id
     object_id = module.AKS.kubelet_identity_object_id
+    depends_on=[module.AKS]
 
 }
 
