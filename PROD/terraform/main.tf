@@ -5,7 +5,7 @@ terraform {
     resource_group_name  = "backend-statefile"
     storage_account_name = "terraformstate1998"
     container_name       = "backend"
-    key                  = "terraform.tfstate"
+    key                  = "terraform-prod.tfstate"
 
   }
 }
