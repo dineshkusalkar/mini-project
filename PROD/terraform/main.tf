@@ -32,8 +32,8 @@ module "AKS"{
 
 module "AKV"{
     source = "../../modules/AKV/"       
-    name = "kvdinesh007-PROD"
-    cluster_name = "AKS-PROD"
+    name = var.name
+    cluster_name = var.cluster_name
     resource_group_name = module.AKS.resource_group_name
     principal_id = module.AKS.kubelet_identity_object_id
     object_id = module.AKS.kubelet_identity_object_id
