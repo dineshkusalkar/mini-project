@@ -22,7 +22,7 @@ provider "azurerm" {
 
 
 module "AKS"{
-    source =  "../modules/AKS/"       #"../modules/AKS/"
+    source =  "../../modules/AKS/"      
     resource_group_name = "mini-project-PROD"
     cluster_name = "AKS-PROD"
   
@@ -31,7 +31,7 @@ module "AKS"{
 
 
 module "AKV"{
-    source = "../modules/AKV/"       #"../modules/AKV/"
+    source = "../../modules/AKV/"       
     name = "kvdinesh007-PROD"
     cluster_name = "AKS-PROD"
     resource_group_name = module.AKS.resource_group_name
