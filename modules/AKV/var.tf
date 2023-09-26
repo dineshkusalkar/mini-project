@@ -34,3 +34,8 @@ variable "cluster_name" {
  
   
 }
+variable "USERNAME" {
+  type        = string
+ 
+  
+}
