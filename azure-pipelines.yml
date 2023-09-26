@@ -40,6 +40,7 @@ stages:
         inlineScript: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
           terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
+          export TF_VAR_USERNAME=$(secret1)
           terraform plan 
           terraform apply --auto-approve
           terraform apply -refresh-only -auto-approve
