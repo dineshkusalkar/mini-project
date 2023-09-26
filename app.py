@@ -16,25 +16,13 @@ app = Flask(__name__)
 secret_name_db_username = 'username'
 secret_name_db_password = 'user-password'
 
-
-# environment = os.getenv("ENVIRONMENT")
-
-# if environment == "QA":
-#     keyvault_url = os.getenv("https://kvdinesh007-qa.vault.azure.net")
-# elif environment == "PROD":
-#     keyvault_url = os.getenv("https://kvdinesh007-prod.vault.azure.net")
-# else:
-#     raise ValueError("Invalid environment specified")
-
-# Initialize Azure Key Vault client using client secret credentials
-# Function to retrieve secrets from Azure Key Vault
 def get_secret(secret_name):
     key_vault_url = os.environ.get("keyvault_url")
 
-    credential = ClientSecretCredential(  # below details are reffer from {example-app} service principle
+    credential = ClientSecretCredential(                                                                           # below details are reffer from {example-app} service principle
         tenant_id='62c65783-e48b-4438-8d2a-50fb84685b6e',
-        client_id='fbc85d1a-63e6-43b1-b528-35f30e561182',             #'a88f3991-4114-4c3b-b01e-d4093a9d269e',               
-        client_secret='56-8Q~fiieMS4OtiiCHRBAzXfQgrlaeq3wVTobA_'      #'MPV8Q~0LnUvSlBGF2YSAdpnsQeQF-VxDqNzMfci4'
+        client_id='fbc85d1a-63e6-43b1-b528-35f30e561182',                          
+        client_secret='56-8Q~fiieMS4OtiiCHRBAzXfQgrlaeq3wVTobA_'     
     )
     secret_client = SecretClient(vault_url=key_vault_url, credential=credential)
 
