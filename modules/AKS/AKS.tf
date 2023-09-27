@@ -55,7 +55,7 @@ output "kubelet_identity_client_id" {
   value       = azurerm_kubernetes_cluster.aks.kubelet_identity[0].client_id
 }
 
-output "resource_group_name" {
+// output "resource_group_name" {
   
-  value       = azurerm_resource_group.mini-project.name
-}
+//   value       = azurerm_resource_group.mini-project.name
+// }
