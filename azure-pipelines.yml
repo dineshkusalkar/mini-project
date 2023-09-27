@@ -45,7 +45,7 @@ stages:
           
           echo $(TF_VAR_USER_NAME)
             terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
-            terraform plan -var USER_NAME=$(TF_VAR_USER_NAME)
+            terraform plan -var "USER_NAME=$(TF_VAR_USER_NAME)"
             # terraform apply --auto-approve
             # terraform apply -refresh-only -auto-approve
             # client_id=$(terraform output kubelet_identity_client_id)
