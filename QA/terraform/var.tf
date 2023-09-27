@@ -4,6 +4,12 @@ variable "resource_group_name" {
   default     = "mini-project-QA"
 }
 
+variable "location" {
+  type        = string
+  description = "Resources location in Azure"
+  default     = "eastus"
+}
+
 variable "cluster_name" {
   type        = string
   description = "AKS name in Azure"
