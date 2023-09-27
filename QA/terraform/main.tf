@@ -16,7 +16,12 @@ provider "azurerm" {
   
 }
 
-
+module "RG"{
+    source =  "../../modules/RG/"      
+    resource_group_name = var.resource_group_name
+    location = var.location
+  
+}
 
 module "AKS"{
     source =  "../../modules/AKS/"      
