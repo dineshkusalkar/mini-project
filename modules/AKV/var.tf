@@ -31,10 +31,9 @@ variable "principal_id" {
 
 variable "cluster_name" {
   type        = string
- 
+  
   
 }
-
 variable "value1" {
   type        = string
   default     = "dinesh"
