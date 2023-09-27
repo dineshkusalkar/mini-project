@@ -10,7 +10,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   name                = var.cluster_name
   kubernetes_version  = var.kubernetes_version
   location            = var.location
-  resource_group_name = azurerm_resource_group.mini-project.name
+  resource_group_name = var.resource_group_name
   dns_prefix          = var.cluster_name
 
 
