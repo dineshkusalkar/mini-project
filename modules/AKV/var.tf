@@ -36,16 +36,16 @@ variable "cluster_name" {
 }
 variable "value1" {
   type        = string
-  default     = "dinesh"
+  # default     = "dinesh"
   
 }
 variable "value2" {
   type        = string
-  default     = "Banglore#1998"
+ # default     = "Banglore#1998"
   
 }
 variable "value3" {
   type        = string
-  default     = "Maharashtra1998@"
+  # default     = "Maharashtra1998@"
   
 }
