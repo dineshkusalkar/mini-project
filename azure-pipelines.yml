@@ -22,13 +22,13 @@ stages:
     steps:
    
     
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'docker'
-        repository: 'dineshmk/node-app'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: 'latest'
+    # - task: Docker@2
+    #   inputs:
+    #     containerRegistry: 'docker'
+    #     repository: 'dineshmk/node-app'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '**/Dockerfile'
+    #     tags: 'latest'
 
    
 
@@ -40,28 +40,29 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
-          terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
-          terraform plan 
-          terraform apply --auto-approve
-          terraform apply -refresh-only -auto-approve
-          client_id=$(terraform output kubelet_identity_client_id)
-          echo $client_id
-          echo "##vso[task.setvariable variable=test]$client_id"
-          echo $(test)
+          echo $(secret1)
+            # terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
+            # terraform plan 
+            # terraform apply --auto-approve
+            # terraform apply -refresh-only -auto-approve
+            # client_id=$(terraform output kubelet_identity_client_id)
+            # echo $client_id
+            # echo "##vso[task.setvariable variable=test]$client_id"
+            # echo $(test)
 
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: |
-          cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
-          az aks get-credentials --resource-group mini-project-$(Build.SourceBranchName) --name AKS-$(Build.SourceBranchName) --overwrite-existing
-          export new_test=$(test)
-          envsubst < secretsproviderclass.yaml > secretsproviderclass-new.yaml
-          kubectl apply -f secretsproviderclass-new.yaml
-          kubectl apply -f webapp-deployment.yaml
-          kubectl apply -f webapp-service.yaml
-          kubectl apply -f db-deployment.yaml
-          kubectl apply -f db-service.yaml
-          kubectl apply -f hpaweb.yaml
-          cat secretsproviderclass-new.yaml
-          cat webapp-deployment.yaml
+    # - task: Bash@3
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
+    #       az aks get-credentials --resource-group mini-project-$(Build.SourceBranchName) --name AKS-$(Build.SourceBranchName) --overwrite-existing
+    #       export new_test=$(test)
+    #       envsubst < secretsproviderclass.yaml > secretsproviderclass-new.yaml
+    #       kubectl apply -f secretsproviderclass-new.yaml
+    #       kubectl apply -f webapp-deployment.yaml
+    #       kubectl apply -f webapp-service.yaml
+    #       kubectl apply -f db-deployment.yaml
+    #       kubectl apply -f db-service.yaml
+    #       kubectl apply -f hpaweb.yaml
+    #       cat secretsproviderclass-new.yaml
+    #       cat webapp-deployment.yaml
