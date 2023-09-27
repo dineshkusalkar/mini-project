@@ -41,7 +41,7 @@ variable "value1" {
 }
 variable "value2" {
   type        = string
-  default     = "mini-project"
+  default     = "Banglore#1998"
   
 }
 variable "value3" {
