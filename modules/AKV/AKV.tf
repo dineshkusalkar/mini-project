@@ -1,9 +1,3 @@
-// data "azurerm_kubernetes_cluster" "aks" {
-//   name = var.cluster_name
-//   resource_group_name = var.resource_group_name
-// }
-
-
 data "azurerm_client_config" "current" {}
 
 
@@ -18,7 +12,7 @@ resource "azurerm_key_vault" "AKV" {
 
 
   
-   // depends_on = [data.azurerm_kubernetes_cluster.aks]
+   
 
   access_policy {
      tenant_id = data.azurerm_client_config.current.tenant_id
