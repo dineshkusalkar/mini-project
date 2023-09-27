@@ -111,7 +111,7 @@ resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
 
 resource "azurerm_key_vault_secret" "secret1" {
   name         = "username"
-  value        = "dinesh"
+  value        = var.value1
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
 
@@ -119,7 +119,7 @@ resource "azurerm_key_vault_secret" "secret1" {
 
 resource "azurerm_key_vault_secret" "secret2" {
   name         = "user-password"
-  value        = "Banglore#1998"
+  value        = var.value2
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
 
@@ -127,7 +127,7 @@ resource "azurerm_key_vault_secret" "secret2" {
 
 resource "azurerm_key_vault_secret" "secret3" {
   name         = "root-password"
-  value        = "Maharashtra1998@"
+  value        = var.value3
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
 
