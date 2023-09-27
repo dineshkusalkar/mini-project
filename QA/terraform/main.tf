@@ -34,7 +34,6 @@ module "AKV"{
     resource_group_name = module.AKS.resource_group_name
     principal_id = module.AKS.kubelet_identity_object_id
     object_id = module.AKS.kubelet_identity_object_id
-    USERNAME = $secret1
     depends_on=[module.AKS]
 
 }
