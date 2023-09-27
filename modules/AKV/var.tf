@@ -31,6 +31,21 @@ variable "principal_id" {
 
 variable "cluster_name" {
   type        = string
- 
+  
+  
+}
+variable "value1" {
+  type        = string
+  default     = "dinesh"
+  
+}
+variable "value2" {
+  type        = string
+  default     = "mini-project"
+  
+}
+variable "value3" {
+  type        = string
+  default     = "mini-project"
   
 }
