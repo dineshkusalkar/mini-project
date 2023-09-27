@@ -105,7 +105,7 @@ resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
 
 resource "azurerm_key_vault_secret" "secret1" {
   name         = "username"
-  value        = var.value1
+  value        = var.USER_NAME
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
 
