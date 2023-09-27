@@ -11,7 +11,8 @@ pr: none
 
 pool:
   name: Agent001
-
+variables: 
+    TF_VAR_USER_NAME: $(secret1)
 stages:
 - stage: Build
   displayName: 'Build Docker image'
@@ -30,19 +31,19 @@ stages:
     #     Dockerfile: '**/Dockerfile'
     #     tags: 'latest'
 
-   
+     
       
-    # - task: AzureCLI@2
-    #   name: terraformApply
-    #   inputs:
-    #     azureSubscription: 'azure'
-    #     scriptType: 'bash'
-    #     scriptLocation: 'inlineScript'
-    #     inlineScript: |
-    #       cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
-    #       echo $(secret1)
-    #       export TF_VAR_value1=$(secret1)
-    #       echo $(TF_VAR_value1)
+    - task: AzureCLI@2
+      name: terraformApply
+      inputs:
+        azureSubscription: 'azure'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
+          echo $(secret1)
+          
+          echo $(TF_VAR_USER_NAME)
             # terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
             # terraform plan 
             # terraform apply --auto-approve
