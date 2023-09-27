@@ -1,7 +1,13 @@
-variable "resource_group_name" {
+variable "resource_group_name" {  
   type        = string
   description = "RG name in Azure"
   default     = "mini-project-PROD"
+}
+
+variable "location" {
+  type        = string
+  description = "Resources location in Azure"
+  default     = "eastus"
 }
 
 variable "cluster_name" {

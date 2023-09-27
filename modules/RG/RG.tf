@@ -1,19 +1,11 @@
-provider "azurerm" {
-  features {
-    
-  }
-     
+resource "azurerm_resource_group" "mini-project" {
+  name     = var.resource_group_name
+  location = var.location
 
 }
 
-# Keep the terraform state file at a centralised location
-# here i created storage account manually and provide details in backend block
-terraform {
-  backend "azurerm" {
-    resource_group_name  = "backend-statefile"
-    storage_account_name = "terraformstate1998"
-    container_name       = "backend"
-    key                  = "terraform.tfstate"
 
-  }
+output "resource_group_name" {
+  
+  value       = azurerm_resource_group.mini-project.name
 }
