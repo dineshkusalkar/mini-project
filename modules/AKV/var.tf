@@ -34,7 +34,7 @@ variable "cluster_name" {
   
   
 }
-variable "value1" {
+variable "USER_NAME" {
   type        = string
   # default     = "dinesh"
   
