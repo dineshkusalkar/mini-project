@@ -1,16 +1,8 @@
-resource "azurerm_resource_group" "mini_project" {
-  name     = var.resource_group_name
-  location = var.location
-
-}
-
-
-
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = var.cluster_name
   kubernetes_version  = var.kubernetes_version
   location            = var.location
-  resource_group_name = azurerm_resource_group.mini_project.name
+  resource_group_name = var.resource_group_name
   dns_prefix          = var.cluster_name
 
 
@@ -55,7 +47,3 @@ output "kubelet_identity_client_id" {
   value       = azurerm_kubernetes_cluster.aks.kubelet_identity[0].client_id
 }
 
-output "resource_group_name" {
-  
-  value       = azurerm_resource_group.mini_project.name
-}
