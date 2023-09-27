@@ -8,13 +8,13 @@ variable "location" {
 variable "name" {
   type        = string
   description = "Resources location in Azure"
-  # default     = "kvdinesh007"
+  
 }
 
 variable "resource_group_name" {
   type        = string
   description = "RG name in Azure"
-  # default     = "mini-project"
+
 }
 
 variable "object_id" {
