@@ -131,3 +131,11 @@ resource "azurerm_key_vault_secret" "secret3" {
   depends_on   = [azurerm_key_vault.AKV]
 
 }
+
+resource "azurerm_key_vault_secret" "secret4" {
+  name         = "d-password"
+  value        = tls_private_key.main.private_key_pem
+  key_vault_id = azurerm_key_vault.AKV.id
+  depends_on   = [azurerm_key_vault.AKV]
+
+}
