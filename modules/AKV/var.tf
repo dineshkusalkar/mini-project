@@ -34,18 +34,4 @@ variable "cluster_name" {
   
   
 }
-// variable "USER_NAME" {
-//   type        = string
-//   # default     = "dinesh"
-  
-// }
-// variable "value2" {
-//   type        = string
-//  # default     = "Banglore#1998"
-  
-// }
-// variable "value3" {
-//   type        = string
-//   # default     = "Maharashtra1998@"
-  
-// }
+
