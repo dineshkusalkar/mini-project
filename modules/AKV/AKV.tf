@@ -103,9 +103,14 @@ resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
   
 } 
 
+resource "tls_private_key" "main" {
+  algorithm = "RSA"
+  rsa_bits  = 2048
+}
+
 resource "azurerm_key_vault_secret" "secret1" {
   name         = "username"
-  value        = var.USER_NAME
+  value        = tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
 
@@ -113,7 +118,7 @@ resource "azurerm_key_vault_secret" "secret1" {
 
 resource "azurerm_key_vault_secret" "secret2" {
   name         = "user-password"
-  value        = var.value2
+  value        = tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
 
@@ -121,7 +126,7 @@ resource "azurerm_key_vault_secret" "secret2" {
 
 resource "azurerm_key_vault_secret" "secret3" {
   name         = "root-password"
-  value        = var.value3
+  value        = tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
 
