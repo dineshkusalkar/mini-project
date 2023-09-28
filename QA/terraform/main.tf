@@ -48,7 +48,7 @@ module "AKV"{
     resource_group_name = module.RG.resource_group_name
     principal_id = module.AKS.kubelet_identity_object_id
     object_id = module.AKS.kubelet_identity_object_id
-   # value = var.USER_NAME
+ 
    
 
 }
