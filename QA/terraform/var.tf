@@ -22,8 +22,3 @@ variable "name" {
   default     = "kvdinesh007-QA"
 }
 
-// variable "USER_NAME" {
-//   type        = string
-//    default     = "dinesh"
-  
-// }
