@@ -4,7 +4,7 @@ trigger:
   branches:
     include:
     - master
-   # - QA
+    - QA
     
 
 pr: none
@@ -43,7 +43,7 @@ stages:
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
            #  echo $(secret1)
            # echo $(TF_VAR_USER_NAME)
-           
+
             terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
             terraform plan                 #-var "USER_NAME=$(TF_VAR_USER_NAME)"
             terraform apply --auto-approve
