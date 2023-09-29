@@ -52,8 +52,11 @@ data "azuread_service_principal" "example-app" {
   # az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/dc272485-d2da-4a98-8171-00ce402c7324" --name example-app
 }
 
+data "azurerm_subscription" "primary" {
+}
+
 resource "azurerm_role_assignment" "ara" {
-  scope                            = azurerm_key_vault.AKV.id
+  scope                            = data.azurerm_subscription.primary.id  #azurerm_key_vault.AKV.id
   role_definition_name             = "Contributor"
   principal_id                     = data.azuread_service_principal.example-app.object_id
   skip_service_principal_aad_check = true
@@ -84,7 +87,7 @@ resource "azurerm_key_vault_access_policy" "example-app-principal" {
 
 
 resource "azurerm_role_assignment" "ara2" {
-  scope                = azurerm_key_vault.AKV.id
+  scope                = data.azurerm_subscription.primary.id     #azurerm_key_vault.AKV.id
   role_definition_name = "Contributor"
   principal_id         = var.principal_id  # azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
     
