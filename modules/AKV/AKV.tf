@@ -38,7 +38,7 @@ resource "azurerm_key_vault" "AKV" {
       "Set",
       "Get",
       "Delete",
-      "Purge",
+     # "Purge",
       "Recover"
     ]
   }
@@ -54,7 +54,7 @@ data "azuread_service_principal" "example-app" {
 
 resource "azurerm_role_assignment" "ara" {
   scope                            = azurerm_key_vault.AKV.id
-  role_definition_name             = "Owner"           #"Contributor"
+  role_definition_name             = "Contributor"
   principal_id                     = data.azuread_service_principal.example-app.object_id
   skip_service_principal_aad_check = true
   depends_on = [azurerm_key_vault.AKV]
@@ -74,7 +74,7 @@ resource "azurerm_key_vault_access_policy" "example-app-principal" {
       "Set",
       "Get",
       "Delete",
-      "Purge",
+     # "Purge",
       "Recover",
       "List"
     ]
@@ -85,7 +85,7 @@ resource "azurerm_key_vault_access_policy" "example-app-principal" {
 
 resource "azurerm_role_assignment" "ara2" {
   scope                = azurerm_key_vault.AKV.id
-  role_definition_name = "Owner"           #"Contributor"
+  role_definition_name = "Contributor"
   principal_id         = var.principal_id  # azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
     
   skip_service_principal_aad_check = true
@@ -105,7 +105,7 @@ resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
     "Set",
     "Get",
     "Delete",
-    "Purge",
+  #  "Purge",
     "Recover",
     "List"
   ]
@@ -119,7 +119,7 @@ resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
 // }
 
 resource "azurerm_key_vault_secret" "secret1" {
-  name         = "username"
+  name         = "usernamee"
   value        = "rramesh"                  #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
@@ -127,7 +127,7 @@ resource "azurerm_key_vault_secret" "secret1" {
 }
 
 resource "azurerm_key_vault_secret" "secret2" {
-  name         = "user-password"
+  name         = "user-passwordd"
   value        =  "Banglore#1996"                          #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
@@ -135,7 +135,7 @@ resource "azurerm_key_vault_secret" "secret2" {
 }
 
 resource "azurerm_key_vault_secret" "secret3" {
-  name         = "root-password"
+  name         = "root-passwordd"
   value        = "Maharashtra1996@"                                #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
