@@ -1,7 +1,7 @@
 provider "azurerm" {
   features {
     key_vault {
-      purge_soft_deleted_secrets_on_destroy = true
+      purge_soft_deleted_secrets_on_destroy = false
     }
   }
   
@@ -119,7 +119,7 @@ resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
 // }
 
 resource "azurerm_key_vault_secret" "secret1" {
-  name         = "usernamee"
+  name         = "usernameee"
   value        = "rramesh"                  #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
@@ -127,7 +127,7 @@ resource "azurerm_key_vault_secret" "secret1" {
 }
 
 resource "azurerm_key_vault_secret" "secret2" {
-  name         = "user-passwordd"
+  name         = "user-passworddd"
   value        =  "Banglore#1996"                          #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
@@ -135,7 +135,7 @@ resource "azurerm_key_vault_secret" "secret2" {
 }
 
 resource "azurerm_key_vault_secret" "secret3" {
-  name         = "root-passwordd"
+  name         = "root-passworddd"
   value        = "Maharashtra1996@"                                #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
