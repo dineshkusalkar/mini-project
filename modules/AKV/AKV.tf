@@ -119,26 +119,28 @@ resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
 // }
 
 resource "azurerm_key_vault_secret" "secret1" {
-  name         = "usernameee"
-  value        = "rramesh"                  #tls_private_key.main.private_key_pem
+  name         = "username"
+  value        = "dinesh"                  #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
-  depends_on   = [azurerm_key_vault.AKV]
+  depends_on   = [azurerm_key_vault.AKV, azurerm_role_assignment.ara, azurerm_key_vault_access_policy.example-app-principal, azurerm_role_assignment.ara2, azurerm_key_vault_access_policy.AKS-Agentpool-principal]
 
 }
 
 resource "azurerm_key_vault_secret" "secret2" {
-  name         = "user-passworddd"
-  value        =  "Banglore#1996"                          #tls_private_key.main.private_key_pem
+  name         = "user-password"
+  value        =  "Banglore#1998"                          #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
-  depends_on   = [azurerm_key_vault.AKV]
+  #depends_on   = [azurerm_key_vault.AKV]
+  depends_on   = [azurerm_key_vault.AKV, azurerm_role_assignment.ara, azurerm_key_vault_access_policy.example-app-principal, azurerm_role_assignment.ara2, azurerm_key_vault_access_policy.AKS-Agentpool-principal]
 
 }
 
 resource "azurerm_key_vault_secret" "secret3" {
-  name         = "root-passworddd"
-  value        = "Maharashtra1996@"                                #tls_private_key.main.private_key_pem
+  name         = "root-password"
+  value        = "Maharashtra1998@"                                #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
-  depends_on   = [azurerm_key_vault.AKV]
+  #depends_on   = [azurerm_key_vault.AKV]
+  depends_on   = [azurerm_key_vault.AKV, azurerm_role_assignment.ara, azurerm_key_vault_access_policy.example-app-principal, azurerm_role_assignment.ara2, azurerm_key_vault_access_policy.AKS-Agentpool-principal]
 
 }
 
