@@ -65,7 +65,7 @@ resource "azurerm_key_vault_access_policy" "example-app-principal" {
   key_vault_id = azurerm_key_vault.AKV.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
   object_id    = data.azuread_service_principal.example-app.object_id
-  depends_on = [azurerm_key_vault.AKV]
+  depends_on = [azurerm_key_vault.AKV, azurerm_role_assignment.ara]
   key_permissions = [
     "Get", "List", "Encrypt", "Decrypt", "Delete"
   ]
