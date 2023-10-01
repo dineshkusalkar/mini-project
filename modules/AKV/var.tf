@@ -34,21 +34,21 @@ variable "user_rootpassword" {
 
 }
 
-// variable "object_id" {
-//   type        = string
+variable "object_id" {
+  type        = string
   
   
-// }
+}
 
-// variable "principal_id" {
-//   type        = string
+variable "principal_id" {
+  type        = string
  
   
-// }
+}
 
-// variable "cluster_name" {
-//   type        = string
+variable "cluster_name" {
+  type        = string
   
   
-// }
+}
 
