@@ -17,6 +17,23 @@ variable "resource_group_name" {
 
 }
 
+variable "user_name" {
+  type        = string
+  
+
+}
+variable "user_password" {
+  type        = string
+  
+
+}
+
+variable "user_rootpassword" {
+  type        = string
+  
+
+}
+
 // variable "object_id" {
 //   type        = string
   
