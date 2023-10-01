@@ -35,22 +35,22 @@ module "RG"{
   
 }
 
-module "AKS"{
-    source =  "../../modules/AKS/"      
-    resource_group_name = module.RG.resource_group_name
-    cluster_name = var.cluster_name
+// module "AKS"{
+//     source =  "../../modules/AKS/"      
+//     resource_group_name = module.RG.resource_group_name
+//     cluster_name = var.cluster_name
   
-}
+// }
 
 
 
 module "AKV"{
     source = "../../modules/AKV/"      
     name = var.name
-    cluster_name = var.cluster_name
+    # cluster_name = var.cluster_name
     resource_group_name = module.RG.resource_group_name
-    principal_id = module.AKS.kubelet_identity_object_id
-    object_id = module.AKS.kubelet_identity_object_id
+   # principal_id = module.AKS.kubelet_identity_object_id
+   # object_id = module.AKS.kubelet_identity_object_id
  
    
 
@@ -58,7 +58,7 @@ module "AKV"{
 
 
 
-output "kubelet_identity_client_id" {
-  value = module.AKS.kubelet_identity_client_id
+// output "kubelet_identity_client_id" {
+//   value = module.AKS.kubelet_identity_client_id
   
-}
+// }
