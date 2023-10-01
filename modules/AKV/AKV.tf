@@ -1,8 +1,8 @@
 provider "azurerm" {
   features {
-    key_vault {
-      purge_soft_deleted_secrets_on_destroy = false
-    }
+    // key_vault {
+    //   purge_soft_deleted_secrets_on_destroy = false
+    // }
   }
   
 }
@@ -17,7 +17,8 @@ resource "azurerm_key_vault" "AKV" {
   resource_group_name        = var.resource_group_name
   tenant_id                  = data.azurerm_client_config.current.tenant_id
   sku_name                   = "standard" 
-  purge_protection_enabled = false
+  soft_delete_retention_days = 7
+ # purge_protection_enabled = false
 
 
 
@@ -52,69 +53,69 @@ data "azuread_service_principal" "example-app" {
   # az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/dc272485-d2da-4a98-8171-00ce402c7324" --name example-app
 }
 
-data "azurerm_subscription" "primary" {
-}
+// data "azurerm_subscription" "primary" {
+// }
 
-resource "azurerm_role_assignment" "ara" {
-  scope                            = azurerm_key_vault.AKV.id       #data.azurerm_subscription.primary.id  
-  role_definition_name             = "Contributor"
-  principal_id                     = data.azuread_service_principal.example-app.object_id
-  skip_service_principal_aad_check = true
-  depends_on = [azurerm_key_vault.AKV]
-}
+// resource "azurerm_role_assignment" "ara" {
+//   scope                            = azurerm_key_vault.AKV.id       #data.azurerm_subscription.primary.id  
+//   role_definition_name             = "Contributor"
+//   principal_id                     = data.azuread_service_principal.example-app.object_id
+//   skip_service_principal_aad_check = true
+//   depends_on = [azurerm_key_vault.AKV]
+// }
 
 
-resource "azurerm_key_vault_access_policy" "example-app-principal" {
-  key_vault_id = azurerm_key_vault.AKV.id
-  tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = data.azuread_service_principal.example-app.object_id
-  depends_on = [azurerm_key_vault.AKV ] #azurerm_role_assignment.ara
-  key_permissions = [
-    "Get", "List", "Encrypt", "Decrypt", "Delete"
-  ]
+// resource "azurerm_key_vault_access_policy" "example-app-principal" {
+//   key_vault_id = azurerm_key_vault.AKV.id
+//   tenant_id    = data.azurerm_client_config.current.tenant_id
+//   object_id    = data.azuread_service_principal.example-app.object_id
+//   depends_on = [azurerm_key_vault.AKV ] #azurerm_role_assignment.ara
+//   key_permissions = [
+//     "Get", "List", "Encrypt", "Decrypt", "Delete"
+//   ]
 
-  secret_permissions = [
-      "Set",
-      "Get",
-      "Delete",
-     # "Purge",
-      "Recover",
-      "List"
-    ]
+//   secret_permissions = [
+//       "Set",
+//       "Get",
+//       "Delete",
+//      # "Purge",
+//       "Recover",
+//       "List"
+//     ]
 
    
-}
+// }
 
 
-resource "azurerm_role_assignment" "ara2" {
-  scope                = azurerm_key_vault.AKV.id   #data.azurerm_subscription.primary.id     
-  role_definition_name = "Contributor"
-  principal_id         = var.principal_id  # azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+// resource "azurerm_role_assignment" "ara2" {
+//   scope                = azurerm_key_vault.AKV.id   #data.azurerm_subscription.primary.id     
+//   role_definition_name = "Contributor"
+//   principal_id         = var.principal_id  # azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
     
-  skip_service_principal_aad_check = true
-  depends_on = [azurerm_key_vault.AKV]
-}
+//   skip_service_principal_aad_check = true
+//   depends_on = [azurerm_key_vault.AKV]
+// }
 
-resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
-  key_vault_id = azurerm_key_vault.AKV.id
-  tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = var.object_id   # azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
-  depends_on = [azurerm_key_vault.AKV]
-  key_permissions = [
-    "Get", "List", "Encrypt", "Decrypt", "Delete"
-  ] 
+// resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
+//   key_vault_id = azurerm_key_vault.AKV.id
+//   tenant_id    = data.azurerm_client_config.current.tenant_id
+//   object_id    = var.object_id   # azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+//   depends_on = [azurerm_key_vault.AKV]
+//   key_permissions = [
+//     "Get", "List", "Encrypt", "Decrypt", "Delete"
+//   ] 
 
-  secret_permissions = [
-    "Set",
-    "Get",
-    "Delete",
-  #  "Purge",
-    "Recover",
-    "List"
-  ]
+//   secret_permissions = [
+//     "Set",
+//     "Get",
+//     "Delete",
+//   #  "Purge",
+//     "Recover",
+//     "List"
+//   ]
 
   
-} 
+// } 
 
 // resource "tls_private_key" "main" {
 //   algorithm = "RSA"
@@ -123,28 +124,25 @@ resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
 
 resource "azurerm_key_vault_secret" "secret1" {
   name         = "username"
-  value        = "dinesh"                  #tls_private_key.main.private_key_pem
+  value        = "amankusalkar"                  #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
-  depends_on   = [azurerm_key_vault.AKV, azurerm_role_assignment.ara, azurerm_key_vault_access_policy.example-app-principal, azurerm_role_assignment.ara2, azurerm_key_vault_access_policy.AKS-Agentpool-principal]
-
+  depends_on   = [azurerm_key_vault.AKV]
 }
 
 resource "azurerm_key_vault_secret" "secret2" {
   name         = "user-password"
-  value        =  "Banglore#1998"                          #tls_private_key.main.private_key_pem
+  value        =  "Banglore#1995"                          #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   #depends_on   = [azurerm_key_vault.AKV]
-  depends_on   = [azurerm_key_vault.AKV, azurerm_role_assignment.ara, azurerm_key_vault_access_policy.example-app-principal, azurerm_role_assignment.ara2, azurerm_key_vault_access_policy.AKS-Agentpool-principal]
-
+  depends_on   = [azurerm_key_vault.AKV]
 }
 
 resource "azurerm_key_vault_secret" "secret3" {
   name         = "root-password"
-  value        = "Maharashtra1998@"                                #tls_private_key.main.private_key_pem
+  value        = "Maharashtra1995@"                                #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   #depends_on   = [azurerm_key_vault.AKV]
-  depends_on   = [azurerm_key_vault.AKV, azurerm_role_assignment.ara, azurerm_key_vault_access_policy.example-app-principal, azurerm_role_assignment.ara2, azurerm_key_vault_access_policy.AKS-Agentpool-principal]
-
+  depends_on   = [azurerm_key_vault.AKV]
 }
 
 // resource "azurerm_key_vault_secret" "secret4" {
