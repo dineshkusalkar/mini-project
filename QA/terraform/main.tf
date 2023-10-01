@@ -10,14 +10,7 @@ terraform {
   }
 }
 
-// terraform {
-//   required_providers {
-//     tls = {
-//       source  = "hashicorp/tls"
-//       version = "~> 4.0.4"
-//     }
-//   }
-// }
+
 
 provider "azurerm" {
   features {
@@ -35,12 +28,12 @@ module "RG"{
   
 }
 
-// module "AKS"{
-//     source =  "../../modules/AKS/"      
-//     resource_group_name = module.RG.resource_group_name
-//     cluster_name = var.cluster_name
+module "AKS"{
+    source =  "../../modules/AKS/"      
+    resource_group_name = module.RG.resource_group_name
+    cluster_name = var.cluster_name
   
-// }
+}
 
 
 
@@ -50,10 +43,10 @@ module "AKV"{
     user_name = var.user_name
     user_password = var.user_password
     user_rootpassword = var.user_rootpassword
-    # cluster_name = var.cluster_name
+    cluster_name = var.cluster_name
     resource_group_name = module.RG.resource_group_name
-   # principal_id = module.AKS.kubelet_identity_object_id
-   # object_id = module.AKS.kubelet_identity_object_id
+    principal_id = module.AKS.kubelet_identity_object_id
+    object_id = module.AKS.kubelet_identity_object_id
  
    
 
@@ -61,7 +54,7 @@ module "AKV"{
 
 
 
-// output "kubelet_identity_client_id" {
-//   value = module.AKS.kubelet_identity_client_id
+output "kubelet_identity_client_id" {
+  value = module.AKS.kubelet_identity_client_id
   
-// }
+}
