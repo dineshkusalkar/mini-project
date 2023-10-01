@@ -122,14 +122,14 @@ data "azuread_service_principal" "example-app" {
 
 resource "azurerm_key_vault_secret" "secret1" {
   name         = "username"
-  value        = "amankusalkar"                  #tls_private_key.main.private_key_pem
+  value        = var.user_name  #"amankusalkar"                  #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
 }
 
 resource "azurerm_key_vault_secret" "secret2" {
   name         = "user-password"
-  value        =  "Banglore#1995"                          #tls_private_key.main.private_key_pem
+  value        =  var.user_password   #"Banglore#1995"                          #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   #depends_on   = [azurerm_key_vault.AKV]
   depends_on   = [azurerm_key_vault.AKV]
@@ -137,7 +137,7 @@ resource "azurerm_key_vault_secret" "secret2" {
 
 resource "azurerm_key_vault_secret" "secret3" {
   name         = "root-password"
-  value        = "Maharashtra1995@"                                #tls_private_key.main.private_key_pem
+  value        =  var.user_rootpassword  #"Maharashtra1995@"                                #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   #depends_on   = [azurerm_key_vault.AKV]
   depends_on   = [azurerm_key_vault.AKV]
