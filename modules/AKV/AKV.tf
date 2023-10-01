@@ -77,14 +77,14 @@ resource "azurerm_key_vault_access_policy" "AKS-Agentpool-principal" {
 
 resource "azurerm_key_vault_secret" "secret1" {
   name         = "username"
-  value        = var.user_name  #"amankusalkar"                  #tls_private_key.main.private_key_pem
+  value        =  "$(user_name)"   #var.user_name  #"amankusalkar"                  #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   depends_on   = [azurerm_key_vault.AKV]
 }
 
 resource "azurerm_key_vault_secret" "secret2" {
   name         = "user-password"
-  value        =  var.user_password   #"Banglore#1995"                          #tls_private_key.main.private_key_pem
+  value        = "$(user_password)"   # var.user_password   #"Banglore#1995"                          #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   #depends_on   = [azurerm_key_vault.AKV]
   depends_on   = [azurerm_key_vault.AKV]
@@ -92,7 +92,7 @@ resource "azurerm_key_vault_secret" "secret2" {
 
 resource "azurerm_key_vault_secret" "secret3" {
   name         = "root-password"
-  value        =  var.user_rootpassword  #"Maharashtra1995@"                                #tls_private_key.main.private_key_pem
+  value        =  "$(user_rootpassword)"   #var.user_rootpassword  #"Maharashtra1995@"                                #tls_private_key.main.private_key_pem
   key_vault_id = azurerm_key_vault.AKV.id
   #depends_on   = [azurerm_key_vault.AKV]
   depends_on   = [azurerm_key_vault.AKV]
