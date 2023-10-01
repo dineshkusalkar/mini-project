@@ -45,7 +45,35 @@ resource "azurerm_key_vault" "AKV" {
 }
 
 
+data "azuread_service_principal" "example-app" {
+  display_name = "example-app"
 
+  # az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/dc272485-d2da-4a98-8171-00ce402c7324" --name example-app
+}
+
+resource "azurerm_role_assignment" "ara" {
+  scope                            = azurerm_key_vault.AKV.id
+  role_definition_name             = "Contributor"
+  principal_id                     = data.azuread_service_principal.example-app.object_id
+  skip_service_principal_aad_check = true
+  depends_on = [azurerm_key_vault.AKV]
+}
+
+
+resource "azurerm_key_vault_access_policy" "example-app-principal" {
+  key_vault_id = azurerm_key_vault.AKV.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = data.azuread_service_principal.example-app.object_id
+  depends_on = [azurerm_key_vault.AKV]
+ 
+
+  secret_permissions = [
+      "Get",
+      "List"
+    ]
+
+   
+}
 
 resource "azurerm_role_assignment" "ara2" {
   scope                = azurerm_key_vault.AKV.id   #data.azurerm_subscription.primary.id     
