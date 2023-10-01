@@ -40,9 +40,9 @@ module "AKS"{
 module "AKV"{
     source = "../../modules/AKV/"      
     name = var.name
-    user_name = var.user_name
-    user_password = var.user_password
-    user_rootpassword = var.user_rootpassword
+    // user_name = var.user_name
+    // user_password = var.user_password
+    // user_rootpassword = var.user_rootpassword
     cluster_name = var.cluster_name
     resource_group_name = module.RG.resource_group_name
     principal_id = module.AKS.kubelet_identity_object_id
