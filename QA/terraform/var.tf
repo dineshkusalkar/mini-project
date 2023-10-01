@@ -22,3 +22,19 @@ variable "name" {
   default     = "kvdinesh007-QA"
 }
 
+variable "user_name" {
+  type        = string
+  
+
+}
+variable "user_password" {
+  type        = string
+  
+
+}
+
+variable "user_rootpassword" {
+  type        = string
+  
+
+}
