@@ -10,11 +10,11 @@ variable "location" {
   default     = "eastus"
 }
 
-// variable "cluster_name" {
-//   type        = string
-//   description = "AKS name in Azure"
-//   default     = "AKS-QA"
-// }
+variable "cluster_name" {
+  type        = string
+  description = "AKS name in Azure"
+  default     = "AKS-QA"
+}
 
 variable "name" {
   type        = string
