@@ -43,6 +43,9 @@ stages:
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
            #  echo $(secret1)
            # echo $(TF_VAR_USER_NAME)
+            export TF_VAR_user_name="$(USER_NAME)"
+            export TF_VAR_user_password="$(USER_PASSWORD)"
+            export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
 
             terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
             terraform plan                 #-var "USER_NAME=$(TF_VAR_USER_NAME)"
