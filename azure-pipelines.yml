@@ -43,14 +43,19 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
-          terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
-          terraform plan 
-          terraform apply --auto-approve
-          terraform apply -refresh-only -auto-approve
-          client_id=$(terraform output kubelet_identity_client_id)
-          echo $client_id
-          echo "##vso[task.setvariable variable=test]$client_id"
-          echo $(test)
+      
+            export TF_VAR_user_name="$(USER_NAME)"
+            export TF_VAR_user_password="$(USER_PASSWORD)"
+            export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
+
+            terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
+            terraform plan                
+            terraform apply --auto-approve
+            
+           client_id=$(terraform output kubelet_identity_client_id)
+           echo $client_id
+           echo "##vso[task.setvariable variable=test]$client_id"
+           echo $(test)
 
     - task: Bash@3
       inputs:
