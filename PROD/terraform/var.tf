@@ -21,3 +21,20 @@ variable "name" {
   description = "Resources location in Azure"
   default     = "kvdinesh007-PROD"
 }
+
+variable "user_name" {
+  type        = string
+  
+
+}
+variable "user_password" {
+  type        = string
+  
+
+}
+
+variable "user_rootpassword" {
+  type        = string
+  
+
+}
