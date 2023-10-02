@@ -27,17 +27,14 @@ resource "azurerm_key_vault" "AKV" {
      tenant_id = data.azurerm_client_config.current.tenant_id
      object_id = data.azurerm_client_config.current.object_id
 
-    key_permissions = [
-      "Create",
-      "Get",
-      "Delete",
-    ]
+   
 
     secret_permissions = [
       "Set",
       "Get",
       "Delete",
-     # "Purge",
+      "List",
+      "Purge",
       "Recover"
     ]
   }
@@ -53,9 +50,8 @@ data "azuread_service_principal" "example-app" {
 
 resource "azurerm_role_assignment" "ara" {
   scope                            = azurerm_key_vault.AKV.id
-  role_definition_name             = "Contributor"
+  role_definition_name             = "Reader"
   principal_id                     = data.azuread_service_principal.example-app.object_id
-  skip_service_principal_aad_check = true
   depends_on = [azurerm_key_vault.AKV]
 }
 
