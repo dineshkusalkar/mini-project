@@ -59,7 +59,8 @@ stages:
         targetType: 'inline'
         script: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
-          az account set --subscription dc272485-d2da-4a98-8171-00ce402c7324
+          'az login --service-principal -u $(AZURE_CLIENT_ID) -p $(AZURE_CLIENT_SECRET) --tenant $(AZURE_TENANT_ID)'
+          
           az aks get-credentials --resource-group mini-project-$(Build.SourceBranchName) --name AKS-$(Build.SourceBranchName) --overwrite-existing
           export new_test=$(test)
           envsubst < secretsproviderclass.yaml > secretsproviderclass-new.yaml
