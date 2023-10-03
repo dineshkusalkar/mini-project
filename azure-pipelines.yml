@@ -72,4 +72,3 @@ stages:
           kubectl apply -f hpaweb.yaml
           cat secretsproviderclass-new.yaml
           cat webapp-deployment.yaml
-# dinesh
