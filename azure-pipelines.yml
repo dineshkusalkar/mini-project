@@ -41,9 +41,9 @@ stages:
         inlineScript: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
       
-          #   export TF_VAR_user_name="$(USER_NAME)"
-          #   export TF_VAR_user_password="$(USER_PASSWORD)"
-          #   export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
+            export TF_VAR_user_name="$(USER_NAME)"
+            export TF_VAR_user_password="$(USER_PASSWORD)"
+            export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
 
              terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
              terraform destroy --auto-approve
