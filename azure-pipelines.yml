@@ -4,7 +4,7 @@ trigger:
   branches:
     include:
     - master
-   # - QA
+    - QA
     
 
 pr: none
@@ -48,7 +48,6 @@ stages:
             terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
             terraform plan                
             terraform apply --auto-approve
-            #terraform apply -refresh-only -auto-approve
            client_id=$(terraform output kubelet_identity_client_id)
            echo $client_id
            echo "##vso[task.setvariable variable=test]$client_id"
@@ -60,7 +59,6 @@ stages:
         script: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
           az login --service-principal -u $(AZURE_CLIENT_ID) -p $(AZURE_CLIENT_SECRET) --tenant $(AZURE_TENANT_ID)
-          
           az aks get-credentials --resource-group mini-project-$(Build.SourceBranchName) --name AKS-$(Build.SourceBranchName) --overwrite-existing
           export new_test=$(test)
           envsubst < secretsproviderclass.yaml > secretsproviderclass-new.yaml
