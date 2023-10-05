@@ -73,11 +73,11 @@ stages:
             cat webapp-deployment-new.yaml
 
            # kubectl apply -f webapp-service.yaml
-          kubectl apply -f db-deployment.yaml
-          kubectl apply -f db-service.yaml
-          kubectl apply -f hpaweb.yaml
-          cat secretsproviderclass-new.yaml
-          # cat webapp-deployment.yaml
+            kubectl apply -f db-deployment.yaml
+            kubectl apply -f db-service.yaml
+            kubectl apply -f hpaweb.yaml
+            cat secretsproviderclass-new.yaml
+            # cat webapp-deployment.yaml
 
     - task: Bash@3
       inputs:
