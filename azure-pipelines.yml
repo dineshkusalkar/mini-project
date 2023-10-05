@@ -41,6 +41,10 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
+          client_id='1234567890'
+          echo $client_id
+          echo "##vso[task.setvariable variable=test]$client_id"
+          echo $(test)
     #         export TF_VAR_user_name="$(USER_NAME)"
     #         export TF_VAR_user_password="$(USER_PASSWORD)"
     #         export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
@@ -51,10 +55,7 @@ stages:
     #         terraform apply --auto-approve
             
     #        client_id=$(terraform output kubelet_identity_client_id)
-              client_id='1234567890'
-              echo $client_id
-              echo "##vso[task.setvariable variable=test]$client_id"
-              echo $(test)
+              
 
     - task: Bash@3
       inputs:
