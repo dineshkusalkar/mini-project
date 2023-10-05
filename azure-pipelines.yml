@@ -33,20 +33,20 @@ stages:
 
    
 
-    - task: AzureCLI@2
-      name: terraformApply
-      inputs:
-        azureSubscription: 'azure'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
-            export TF_VAR_user_name="$(USER_NAME)"
-            export TF_VAR_user_password="$(USER_PASSWORD)"
-            export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
+    # - task: AzureCLI@2
+    #   name: terraformApply
+    #   inputs:
+    #     azureSubscription: 'azure'
+    #     scriptType: 'bash'
+    #     scriptLocation: 'inlineScript'
+    #     inlineScript: |
+    #       cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
+    #         export TF_VAR_user_name="$(USER_NAME)"
+    #         export TF_VAR_user_password="$(USER_PASSWORD)"
+    #         export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
 
-               terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
-               terraform destroy --auto-approve
+    #            terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
+    #            terraform destroy --auto-approve
     #         terraform plan                
     #         terraform apply --auto-approve
             
@@ -55,22 +55,22 @@ stages:
     #        echo "##vso[task.setvariable variable=test]$client_id"
     #        echo $(test)
 
-    # - task: Bash@3
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #        cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
     #          az login --service-principal -u $(AZURE_CLIENT_ID) -p $(AZURE_CLIENT_SECRET) --tenant $(AZURE_TENANT_ID)
     #         az aks get-credentials --resource-group mini-project-$(Build.SourceBranchName) --name AKS-$(Build.SourceBranchName) --overwrite-existing
     #         export new_test=$(test)
     #         envsubst '${new_test}'< secretsproviderclass.yaml > secretsproviderclass-new.yaml
     #         kubectl apply -f secretsproviderclass-new.yaml
 
-    #         export new_id=$(AZURE_CLIENT_ID)
-    #         echo $new_id
-    #         envsubst '${new_id}'< webapp-deployment.yaml > webapp-deployment-new.yaml
-    #         kubectl apply -f webapp-deployment-new.yaml
-    #         cat webapp-deployment-new.yaml
+            export new_id=$(AZURE_CLIENT_ID)
+            echo $new_id
+            envsubst '${new_id}'< webapp-deployment.yaml > webapp-deployment-new.yaml
+           # kubectl apply -f webapp-deployment-new.yaml
+            cat webapp-deployment-new.yaml
          
 
     #        # kubectl apply -f webapp-service.yaml
@@ -80,9 +80,3 @@ stages:
     #         cat secretsproviderclass-new.yaml
     #         # cat webapp-deployment.yaml
 
-    # - task: Bash@3
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #         cd $(System.DefaultWorkingDirectory)
-    #         cat app.py
