@@ -60,23 +60,23 @@ stages:
           targetType: 'inline'
           script: |
             cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
-      #          az login --service-principal -u $(AZURE_CLIENT_ID) -p $(AZURE_CLIENT_SECRET) --tenant $(AZURE_TENANT_ID)
-      #         az aks get-credentials --resource-group mini-project-$(Build.SourceBranchName) --name AKS-$(Build.SourceBranchName) --overwrite-existing
-      #         export new_test=$(test)
-      #         envsubst '${new_test}'< secretsproviderclass.yaml > secretsproviderclass-new.yaml
-      #         kubectl apply -f secretsproviderclass-new.yaml
+              az login --service-principal -u $(AZURE_CLIENT_ID) -p $(AZURE_CLIENT_SECRET) --tenant $(AZURE_TENANT_ID)
+              az aks get-credentials --resource-group mini-project-$(Build.SourceBranchName) --name AKS-$(Build.SourceBranchName) --overwrite-existing
+              export new_test=$(test)
+              envsubst '${new_test}'< secretsproviderclass.yaml > secretsproviderclass-new.yaml
+              kubectl apply -f secretsproviderclass-new.yaml
 
-           #   export new_id=$(AZURE_CLIENT_ID)
+              export new_id=$(AZURE_CLIENT_ID)
               echo $new_id
               envsubst '${new_id}'< webapp-deployment.yaml > webapp-deployment-new.yaml
     # kubectl apply -f webapp-deployment-new.yaml
               cat webapp-deployment-new.yaml
           
 
-      #        # kubectl apply -f webapp-service.yaml
-      #         kubectl apply -f db-deployment.yaml
-      #         kubectl apply -f db-service.yaml
-      #         kubectl apply -f hpaweb.yaml
-      #         cat secretsproviderclass-new.yaml
-      #         # cat webapp-deployment.yaml
+              # kubectl apply -f webapp-service.yaml
+              # kubectl apply -f db-deployment.yaml
+              # kubectl apply -f db-service.yaml
+              # kubectl apply -f hpaweb.yaml
+              # cat secretsproviderclass-new.yaml
+              # cat webapp-deployment.yaml
 
