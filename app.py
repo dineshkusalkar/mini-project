@@ -20,7 +20,7 @@ def get_secret(secret_name):
     key_vault_url = os.environ.get("keyvault_url")
 
     credential = ClientSecretCredential(                                                                           # below details are reffer from {example-app} service principle
-        tenant_id='62c65783-e48b-4438-8d2a-50fb84685b6e',
+        tenant_id= os.environ.get("client_id")                                         #'62c65783-e48b-4438-8d2a-50fb84685b6e',
         client_id='fbc85d1a-63e6-43b1-b528-35f30e561182',                          
         client_secret='56-8Q~fiieMS4OtiiCHRBAzXfQgrlaeq3wVTobA_'     
     )
