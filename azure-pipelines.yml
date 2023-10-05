@@ -77,6 +77,7 @@ stages:
               cat webapp-deployment-new.yaml
 
               export new_test=$(test)
+              echo $(test)
               envsubst '${new_test}'< secretsproviderclass.yaml > secretsproviderclass-new.yaml
               cat secretsproviderclass-new.yaml
             #   kubectl apply -f secretsproviderclass-new.yaml
