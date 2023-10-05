@@ -62,7 +62,7 @@ stages:
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
             # az login --service-principal -u $(AZURE_CLIENT_ID) -p $(AZURE_CLIENT_SECRET) --tenant $(AZURE_TENANT_ID)
             # az aks get-credentials --resource-group mini-project-$(Build.SourceBranchName) --name AKS-$(Build.SourceBranchName) --overwrite-existing
-              export new_test=$(AZURE_CLIENT_SECRET)
+              export new_test='23456789'
               envsubst '${new_test}'< secretsproviderclass.yaml > secretsproviderclass-new.yaml
               cat secretsproviderclass-new.yaml
             #   kubectl apply -f secretsproviderclass-new.yaml
