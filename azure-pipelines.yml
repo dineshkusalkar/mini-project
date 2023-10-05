@@ -4,7 +4,7 @@ trigger:
   branches:
     include:
     - master
-  #  - QA
+    - QA
   
     
 
@@ -63,7 +63,7 @@ stages:
           az login --service-principal -u $(AZURE_CLIENT_ID) -p $(AZURE_CLIENT_SECRET) --tenant $(AZURE_TENANT_ID)
           az aks get-credentials --resource-group mini-project-$(Build.SourceBranchName) --name AKS-$(Build.SourceBranchName) --overwrite-existing
           export new_test=$(test)
-          envsubst < secretsproviderclass.yaml > secretsproviderclass-new.yaml
+          envsubst '${new_test}'< secretsproviderclass.yaml > secretsproviderclass-new.yaml
           kubectl apply -f secretsproviderclass-new.yaml
           kubectl apply -f webapp-deployment.yaml
           kubectl apply -f webapp-service.yaml
