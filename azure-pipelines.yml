@@ -46,7 +46,7 @@ stages:
           echo "##vso[task.setvariable variable=test]$client_id"
           echo $(test)
          
-          lient_id="$(AZURE_CLIENT_ID)"
+          lient_id= echo "$(AZURE_CLIENT_ID)"
           echo $lient_id
           echo "##vso[task.setvariable variable=rest]$lient_id"
           echo $(rest)
