@@ -66,11 +66,11 @@ stages:
     #         envsubst '${new_test}'< secretsproviderclass.yaml > secretsproviderclass-new.yaml
     #         kubectl apply -f secretsproviderclass-new.yaml
 
-            export new_id=$(AZURE_CLIENT_ID)
-            echo $new_id
-            envsubst '${new_id}'< webapp-deployment.yaml > webapp-deployment-new.yaml
-           # kubectl apply -f webapp-deployment-new.yaml
-            cat webapp-deployment-new.yaml
+              export new_id=$(AZURE_CLIENT_ID)
+              echo $new_id
+              envsubst '${new_id}'< webapp-deployment.yaml > webapp-deployment-new.yaml
+            # kubectl apply -f webapp-deployment-new.yaml
+              cat webapp-deployment-new.yaml
          
 
     #        # kubectl apply -f webapp-service.yaml
