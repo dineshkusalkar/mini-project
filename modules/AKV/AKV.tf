@@ -42,36 +42,36 @@ resource "azurerm_key_vault" "Azure_Key_Vault" {
 }
 
 
-data "azuread_service_principal" "example-app" {
-  display_name = "example-app"
+// data "azuread_service_principal" "example-app" {
+//   display_name = "example-app"
 
-  # az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/dc272485-d2da-4a98-8171-00ce402c7324" --name example-app
-}
+//   # az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/dc272485-d2da-4a98-8171-00ce402c7324" --name example-app
+// }
 
-resource "azurerm_role_assignment" "ara" {
-  scope                            = azurerm_key_vault.Azure_Key_Vault.id
-  role_definition_name             = "Reader"
-  principal_id                     = data.azuread_service_principal.example-app.object_id
-  depends_on = [azurerm_key_vault.AKV]
-}
+// resource "azurerm_role_assignment" "ara" {
+//   scope                            = azurerm_key_vault.Azure_Key_Vault.id
+//   role_definition_name             = "Reader"
+//   principal_id                     = data.azuread_service_principal.example-app.object_id
+//   depends_on = [azurerm_key_vault.AKV]
+// }
 
 
-resource "azurerm_key_vault_access_policy" "example-app-principal" {
-  key_vault_id = azurerm_key_vault.Azure_Key_Vault.id
-  tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = data.azuread_service_principal.example-app.object_id
-  depends_on = [azurerm_key_vault.Azure_Key_Vault]
+// resource "azurerm_key_vault_access_policy" "example-app-principal" {
+//   key_vault_id = azurerm_key_vault.Azure_Key_Vault.id
+//   tenant_id    = data.azurerm_client_config.current.tenant_id
+//   object_id    = data.azuread_service_principal.example-app.object_id
+//   depends_on = [azurerm_key_vault.Azure_Key_Vault]
  
 
-  secret_permissions = [
-      "Get",
-      "List"
-    ]
+//   secret_permissions = [
+//       "Get",
+//       "List"
+//     ]
 
    
-}
+// }
 
-resource "azurerm_role_assignment" "ara2" {
+resource "azurerm_role_assignment" "role_assignment" {
   scope                = azurerm_key_vault.Azure_Key_Vault.id        
   role_definition_name = "Contributor"
   principal_id         = var.principal_id  # azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
