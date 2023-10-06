@@ -34,3 +34,9 @@ variable "vm_size" {
   description = "vm_size"
   default     = "Standard_DS2_v2"
 }
+
+variable "vm_type" {
+  type        = string
+  description = "vm_type"
+  default     = "VirtualMachineScaleSets"
+}
