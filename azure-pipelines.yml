@@ -69,13 +69,16 @@ stages:
             envsubst '${new_id}' < webapp-deployment.yaml > webapp-deployment-new.yaml
 
             export new_pwd=$(AZURE_CLIENT_SECRET)
-            envsubst '${new_pwd}' <webapp-deployment-new.yaml > webapp-deployment-update.yaml
+            envsubst '${new_pwd}' < webapp-deployment-new.yaml > webapp-deployment-update.yaml
+
+            export tenant_id=$(AZURE_TENANT_ID)
+            envsubst '${tenant_id}' < webapp-deployment-update.yaml > webapp-deployment-modified.yaml
            
-            kubectl apply -f webapp-deployment-update.yaml
+            kubectl apply -f webapp-deployment-modified.yaml
 
             kubectl apply -f webapp-service.yaml
             kubectl apply -f db-deployment.yaml
             kubectl apply -f db-service.yaml
             kubectl apply -f hpaweb.yaml
             cat secretsproviderclass-new.yaml
-            cat webapp-deployment-update.yaml
+            cat webapp-deployment-modified.yaml
