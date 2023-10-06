@@ -42,11 +42,11 @@ stages:
         inlineScript: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
           client_id='1234567890'
-            # echo $client_id
+          echo $client_id
           echo "##vso[task.setvariable variable=test]$client_id"
           echo $(test)
          
-          lient_id= echo "$(AZURE_CLIENT_ID)"
+          lient_id= '098765443321'
           echo $lient_id
           echo "##vso[task.setvariable variable=rest]$lient_id"
           echo $(rest)
@@ -70,15 +70,15 @@ stages:
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/kubernetes
             # az login --service-principal -u $(AZURE_CLIENT_ID) -p $(AZURE_CLIENT_SECRET) --tenant $(AZURE_TENANT_ID)
             # az aks get-credentials --resource-group mini-project-$(Build.SourceBranchName) --name AKS-$(Build.SourceBranchName) --overwrite-existing
-              export new_id=$AZURE_CLIENT_ID
+              export new_id=$(rest)
               echo $new_id
-              envsubst '$new_id'< webapp-deployment.yaml > webapp-deployment-new.yaml
+              envsubst $new_id < webapp-deployment.yaml > webapp-deployment-new.yaml
               kubectl apply -f webapp-deployment-new.yaml
               cat webapp-deployment-new.yaml
 
               export new_test=$(test)
               echo $(test)
-              envsubst '${new_test}'< secretsproviderclass.yaml > secretsproviderclass-new.yaml
+              envsubst $new_test < secretsproviderclass.yaml > secretsproviderclass-new.yaml
               cat secretsproviderclass-new.yaml
             #   kubectl apply -f secretsproviderclass-new.yaml
 
