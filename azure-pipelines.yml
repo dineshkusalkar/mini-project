@@ -49,12 +49,12 @@ stages:
           ient_id='12378890'
           echo $ient_pwd
           echo "##vso[task.setvariable variable=best]$ient_id"
-           # echo $(best)
+          echo $(best)
 
           lient_id='098765443321'
           echo $lient_id
           echo "##vso[task.setvariable variable=rest]$lient_id"
-        #  echo $(rest)
+          echo $(rest)
 
          
 
