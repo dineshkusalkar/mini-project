@@ -54,7 +54,7 @@ stages:
           lient_id='098765443321'
           echo $lient_id
           echo "##vso[task.setvariable variable=rest]$lient_id"
-          echo $(rest)
+        #  echo $(rest)
 
          
 
