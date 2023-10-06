@@ -27,7 +27,9 @@ spec:
         - name: client_id
           value: "${new_id}"
         - name: client_secret
-          value: "${new_pwd}"  
+          value: "${new_pwd}" 
+        - name: tenant_id
+          value: "${tenant_id}" 
         - name: DB_PORT
           value: "3306"
         - name: DB_NAME
