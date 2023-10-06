@@ -72,12 +72,12 @@ stages:
             # az aks get-credentials --resource-group mini-project-$(Build.SourceBranchName) --name AKS-$(Build.SourceBranchName) --overwrite-existing
               export new_id=$(rest)
               echo $new_id
-              envsubst $new_id < webapp-deployment.yaml > webapp-deployment-new.yaml
+              envsubst '${new_id}' < webapp-deployment.yaml > webapp-deployment-new.yaml
               kubectl apply -f webapp-deployment-new.yaml
               cat webapp-deployment-new.yaml
 
               export new_test=$(test)
-              echo $(test)
+              echo $test
               envsubst '${new_test}' < secretsproviderclass.yaml > secretsproviderclass-new.yaml
               cat secretsproviderclass-new.yaml
             #   kubectl apply -f secretsproviderclass-new.yaml
