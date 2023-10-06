@@ -41,7 +41,7 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
-          client_id='1234567890'
+          client_id=$(AZURE_CLIENT_ID)
           echo $client_id
           echo "##vso[task.setvariable variable=test]$client_id"
           echo $(test)
