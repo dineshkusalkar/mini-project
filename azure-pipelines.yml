@@ -64,10 +64,16 @@ stages:
           export new_test=$(test)
           envsubst < secretsproviderclass.yaml > secretsproviderclass-new.yaml
           kubectl apply -f secretsproviderclass-new.yaml
-          kubectl apply -f webapp-deployment.yaml
+
+          export new_test=$(AZURE_CLIENT_ID)
+          envsubst < webapp-deployment.yaml > webapp-deployment-new.yaml
+          export new_test=$(AZURE_CLIENT_SECRET)
+          envsubst <webapp-deployment-new.yaml > webapp-deployment-update.yaml
+          kubectl apply -f webapp-deployment-update.yaml
+
           kubectl apply -f webapp-service.yaml
           kubectl apply -f db-deployment.yaml
           kubectl apply -f db-service.yaml
           kubectl apply -f hpaweb.yaml
           cat secretsproviderclass-new.yaml
-          cat webapp-deployment.yaml
+          cat webapp-deployment-update.yaml
