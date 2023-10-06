@@ -46,9 +46,9 @@ stages:
           echo "##vso[task.setvariable variable=test]$client_id"
           echo $(test)
 
-          client_Pwd='12378890'
-          echo $client_pwd
-          echo "##vso[task.setvariable variable=best]$client_pwd"
+          ient_id='12378890'
+          echo $ient_pwd
+          echo "##vso[task.setvariable variable=best]$ient_id"
            # echo $(best)
 
           lient_id='098765443321'
