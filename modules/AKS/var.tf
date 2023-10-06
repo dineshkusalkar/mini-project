@@ -31,6 +31,6 @@ variable "system_node_count" {
 
 variable "vm_size" {
   type        = string
-  description = "Number of AKS worker nodes"
-  default     = 1
+  description = "vm_size"
+  default     = "Standard_DS2_v2"
 }
