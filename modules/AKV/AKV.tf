@@ -23,21 +23,21 @@ resource "azurerm_key_vault" "Azure_Key_Vault" {
   
    
 
-  access_policy {
-     tenant_id = data.azurerm_client_config.current.tenant_id
-     object_id = data.azurerm_client_config.current.object_id
+  // access_policy {
+  //    tenant_id = data.azurerm_client_config.current.tenant_id
+  //    object_id = data.azurerm_client_config.current.object_id
 
    
 
-    secret_permissions = [
-      "Set",
-      "Get",
-      "Delete",
-      "List",
-      "Purge",
-      "Recover"
-    ]
-  }
+  //   secret_permissions = [
+  //     "Set",
+  //     "Get",
+  //     "Delete",
+  //     "List",
+  //     "Purge",
+  //     "Recover"
+  //   ]
+  // }
 
 }
 
