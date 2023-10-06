@@ -28,3 +28,9 @@ variable "system_node_count" {
   description = "Number of AKS worker nodes"
   default     = 1
 }
+
+variable "vm_size" {
+  type        = string
+  description = "Number of AKS worker nodes"
+  default     = 1
+}
