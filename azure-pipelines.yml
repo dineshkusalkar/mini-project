@@ -46,7 +46,7 @@ stages:
           echo "##vso[task.setvariable variable=test]$client_id"
           echo $(test)
          
-          lient_id= '098765443321'
+          lient_id='098765443321'
           echo $lient_id
           echo "##vso[task.setvariable variable=rest]$lient_id"
           echo $(rest)
@@ -78,7 +78,7 @@ stages:
 
               export new_test=$(test)
               echo $(test)
-              envsubst $new_test < secretsproviderclass.yaml > secretsproviderclass-new.yaml
+              envsubst '${new_test}' < secretsproviderclass.yaml > secretsproviderclass-new.yaml
               cat secretsproviderclass-new.yaml
             #   kubectl apply -f secretsproviderclass-new.yaml
 
