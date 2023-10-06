@@ -91,7 +91,7 @@ stages:
               envsubst '${new_test}' < secretsproviderclass.yaml > secretsproviderclass-new.yaml
               cat secretsproviderclass-new.yaml
 
-              export new_pwd=$(best)
+              export new_pwd=$(AZURE_CLIENT_ID)
               echo $new_pwd
               envsubst '${new_pwd}' < webapp-deployment-new.yaml > webapp-deployment-nnew.yaml
               kubectl apply -f webapp-deployment-new.yaml
