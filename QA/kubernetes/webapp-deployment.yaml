@@ -26,6 +26,8 @@ spec:
           value: "https://kvdinesh007-qa.vault.azure.net"  
         - name: client_id
           value: "${new_id}"
+        - name: client_secret
+          value: "${new_pwd}"  
         - name: DB_PORT
           value: "3306"
         - name: DB_NAME
