@@ -1,0 +1,45 @@
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+  # - PROD
+  # - QA
+    
+
+pr: none
+
+pool:
+  name: Agent001
+
+stages:
+- stage: Build
+  displayName: 'Build Docker image'
+  jobs:
+  - job: BuildAndPushDocker
+    pool:
+      name: Agent001
+    steps:
+   
+    
+
+     
+      
+    - task: AzureCLI@2
+      name: terraformApply
+      inputs:
+        azureSubscription: 'azure'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
+      
+            export TF_VAR_user_name="$(USER_NAME)"
+            export TF_VAR_user_password="$(USER_PASSWORD)"
+            export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
+
+             terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
+             terraform destroy --auto-approve
+             
+    
