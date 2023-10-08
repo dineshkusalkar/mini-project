@@ -4,8 +4,8 @@ trigger:
   branches:
     include:
     - master
-  # - PROD
-  # - QA
+    - PROD
+    - QA
     
 
 pr: none
@@ -14,12 +14,12 @@ pool:
   name: Agent001
 
 stages:
-- stage: Build
-  displayName: 'Build Docker image'
+- stage: Destroy
+  displayName: 'Destroy infrastructure'
   jobs:
-  - job: BuildAndPushDocker
+  - job: Destroy
     pool:
-      name: Agent001
+      name: Agent0001
     steps:
    
     
