@@ -4,7 +4,7 @@ trigger:
   branches:
     include:
     - master
-  #  - QA
+    - QA
     
 
 pr: none
@@ -46,7 +46,6 @@ stages:
             export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
 
              terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
-            # terraform destroy --auto-approve
              terraform plan                
              terraform apply --auto-approve
             client_id=$(terraform output kubelet_identity_client_id)
