@@ -1,4 +1,4 @@
-resource "azurerm_kubernetes_cluster" "aks" {
+resource "azurerm_kubernetes_cluster" "Kubernetes_cluster" {
   name                = var.cluster_name
   kubernetes_version  = var.kubernetes_version
   location            = var.location
@@ -9,8 +9,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   default_node_pool {
     name       = "system"
     node_count = var.system_node_count
-    vm_size    = "Standard_DS2_v2"
-    type       = "VirtualMachineScaleSets"
+    vm_size    = var.vm_size
+    type       = var.vm_type
 
     zones               = [1, 2, 3]
     enable_auto_scaling = true
@@ -38,12 +38,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
  output "kubelet_identity_object_id" {
       description = "The `azurerm_kubernetes_cluster`'s `kubelet_identity` block."
-      value       = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+      value       = azurerm_kubernetes_cluster.Kubernetes_cluster.kubelet_identity[0].object_id
     }
 
 
 output "kubelet_identity_client_id" {
   description = "The `azurerm_kubernetes_cluster`'s `kubelet_identity` block."
-  value       = azurerm_kubernetes_cluster.aks.kubelet_identity[0].client_id
+  value       = azurerm_kubernetes_cluster.Kubernetes_cluster.kubelet_identity[0].client_id
 }
 
