@@ -3,15 +3,13 @@ trigger:
   batch: true
   branches:
     include:
-    - master
-    - QA
     - PROD
     
 
 pr: none
 
 pool:
-  name: Agent001
+  name: Agent0001
 
 stages:
 - stage: Build
@@ -19,7 +17,7 @@ stages:
   jobs:
   - job: BuildAndPushDocker
     pool:
-      name: Agent001
+      name: Agent0001
     steps:
    
     
