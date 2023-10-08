@@ -11,7 +11,7 @@ trigger:
 pr: none
 
 pool:
-  name: Agent001
+  name: Agent0001
 
 stages:
 - stage: Destroy
