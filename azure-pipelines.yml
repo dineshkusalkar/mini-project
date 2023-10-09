@@ -41,7 +41,7 @@ stages:
         inlineScript: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
       
-            export TF_VAR_user_name="$(USER_Name)"
+            export TF_VAR_user_name="$(USER_NAME)"
             export TF_VAR_user_password="$(USER_PASSWORD)"
             export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
 
@@ -64,7 +64,7 @@ stages:
             envsubst '${new_test}' < secretsproviderclass.yaml > secretsproviderclass-new.yaml
             kubectl apply -f secretsproviderclass-new.yaml
 
-            export new_id=$(AZURE_CLIENT)
+            export new_id=$(AZURE_CLIENT_ID)
             envsubst '${new_id}' < webapp-deployment.yaml > webapp-deployment-new.yaml
 
             export new_pwd=$(AZURE_CLIENT_SECRET)
