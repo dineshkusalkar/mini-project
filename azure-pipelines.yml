@@ -41,7 +41,7 @@ stages:
         inlineScript: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
       
-            export TF_VAR_user_name="$(USER_NAME)"
+            export TF_VAR_user_name="$(USER_Name)"
             export TF_VAR_user_password="$(USER_PASSWORD)"
             export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
 
