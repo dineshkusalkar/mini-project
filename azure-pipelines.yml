@@ -8,7 +8,7 @@ trigger:
 pr: none
 
 pool:
-  name: Agent0001
+  name: my_agents
 
 stages:
 - stage: Build
@@ -16,7 +16,7 @@ stages:
   jobs:
   - job: BuildAndPushDocker
     pool:
-      name: Agent0001
+      name: my_agents
     steps:
    
     
