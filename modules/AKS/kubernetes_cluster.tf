@@ -1,4 +1,4 @@
-resource "azurerm_kubernetes_cluster" "Kubernetes_cluster" {
+resource "azurerm_kubernetes_cluster" "kubernetes_cluster" {
   name                = var.cluster_name
   kubernetes_version  = var.kubernetes_version
   location            = var.location
@@ -38,12 +38,12 @@ resource "azurerm_kubernetes_cluster" "Kubernetes_cluster" {
 
  output "kubelet_identity_object_id" {
       description = "The `azurerm_kubernetes_cluster`'s `kubelet_identity` block."
-      value       = azurerm_kubernetes_cluster.Kubernetes_cluster.kubelet_identity[0].object_id
+      value       = azurerm_kubernetes_cluster.kubernetes_cluster.kubelet_identity[0].object_id
     }
 
 
 output "kubelet_identity_client_id" {
   description = "The `azurerm_kubernetes_cluster`'s `kubelet_identity` block."
-  value       = azurerm_kubernetes_cluster.Kubernetes_cluster.kubelet_identity[0].client_id
+  value       = azurerm_kubernetes_cluster.kubernetes_cluster.kubelet_identity[0].client_id
 }
 
