@@ -8,7 +8,6 @@
 
 data "azurerm_client_config" "current" {}
 
-
 resource "azurerm_key_vault" "azure_key_vault" {
   name                       = var.name
   location                   = var.location
@@ -16,18 +15,10 @@ resource "azurerm_key_vault" "azure_key_vault" {
   tenant_id                  = data.azurerm_client_config.current.tenant_id
   sku_name                   = "standard" 
   soft_delete_retention_days = 7
- 
-
-
-
-  
-   
 
   access_policy {
      tenant_id = data.azurerm_client_config.current.tenant_id
      object_id = data.azurerm_client_config.current.object_id
-
-   
 
     secret_permissions = [
       "Set",
@@ -40,9 +31,6 @@ resource "azurerm_key_vault" "azure_key_vault" {
   }
 
 }
-
-
-
 
 resource "azurerm_role_assignment" "role_assignment" {
   scope                = azurerm_key_vault.azure_key_vault.id        
@@ -58,8 +46,6 @@ resource "azurerm_key_vault_access_policy" "aks-agentpool" {
   tenant_id    = data.azurerm_client_config.current.tenant_id
   object_id    = var.object_id   
   depends_on = [azurerm_key_vault.azure_key_vault]
-  
-
   secret_permissions = [
    
     "Get",
@@ -69,8 +55,6 @@ resource "azurerm_key_vault_access_policy" "aks-agentpool" {
 
   
 } 
-
-
 
 resource "azurerm_key_vault_secret" "secret1" {
   name         = "username"
