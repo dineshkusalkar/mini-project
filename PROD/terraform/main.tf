@@ -10,18 +10,10 @@ terraform {
   }
 }
 
-
 provider "azurerm" {
-  features {
-    
-  }
+  features {}
   skip_provider_registration = true
 }
-
-provider "azuread" {
-  
-}
-
 
 module "RG"{
     source =  "../../modules/RG/"      
@@ -37,8 +29,6 @@ module "AKS"{
   
 }
 
-
-
 module "AKV"{
     source = "../../modules/AKV/"      
     name = var.name
@@ -49,12 +39,7 @@ module "AKV"{
     resource_group_name = module.RG.resource_group_name
     principal_id = module.AKS.kubelet_identity_object_id
     object_id = module.AKS.kubelet_identity_object_id
- 
-   
-
 }
-
-
 
 output "kubelet_identity_client_id" {
   value = module.AKS.kubelet_identity_client_id

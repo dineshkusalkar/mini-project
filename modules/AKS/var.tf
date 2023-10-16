@@ -22,7 +22,6 @@ variable "kubernetes_version" {
   default     = "1.26.6"
 }
 
-
 variable "system_node_count" {
   type        = number
   description = "Number of AKS worker nodes"
