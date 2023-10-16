@@ -5,7 +5,6 @@ resource "azurerm_kubernetes_cluster" "kubernetes_cluster" {
   resource_group_name = var.resource_group_name
   dns_prefix          = var.cluster_name
 
-
   default_node_pool {
     name       = "system"
     node_count = var.system_node_count
@@ -23,7 +22,6 @@ resource "azurerm_kubernetes_cluster" "kubernetes_cluster" {
     type = "SystemAssigned"
   }
 
-
   key_vault_secrets_provider {
     secret_rotation_enabled = true
   }
@@ -33,14 +31,12 @@ resource "azurerm_kubernetes_cluster" "kubernetes_cluster" {
     network_plugin    = "kubenet"
   }
 
-
 }
 
  output "kubelet_identity_object_id" {
       description = "The `azurerm_kubernetes_cluster`'s `kubelet_identity` block."
       value       = azurerm_kubernetes_cluster.kubernetes_cluster.kubelet_identity[0].object_id
     }
-
 
 output "kubelet_identity_client_id" {
   description = "The `azurerm_kubernetes_cluster`'s `kubelet_identity` block."
