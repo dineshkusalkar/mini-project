@@ -4,7 +4,6 @@ trigger:
     include:
     - PROD
     
-
 pr: none
 
 pool:
@@ -15,11 +14,7 @@ stages:
   displayName: 'Build Docker images'
   jobs:
   - job: BuildAndPushDocker
-    pool:
-      name: my_agents
-    steps:
-   
-    
+    steps:   
     - task: Docker@2
       inputs:
         containerRegistry: 'docker'
@@ -27,8 +22,6 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: 'latest'
-
-   
 
     - task: AzureCLI@2
       name: terraformApply
@@ -42,8 +35,7 @@ stages:
             export TF_VAR_user_password="$(USER_PASSWORD)"
             export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
 
-            terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
-            
+            terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"           
             terraform plan                
             terraform apply --auto-approve
             
@@ -73,7 +65,6 @@ stages:
             envsubst '${tenant_id}' < webapp-deployment-update.yaml > webapp-deployment-modified.yaml
            
             kubectl apply -f webapp-deployment-modified.yaml
-
             kubectl apply -f webapp-service.yaml
             kubectl apply -f db-deployment.yaml
             kubectl apply -f db-service.yaml
