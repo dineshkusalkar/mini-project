@@ -3,9 +3,9 @@
 terraform {
   backend "azurerm" {
     resource_group_name  = "backend-statefile"
-    storage_account_name = "terraformstate1998"
+    storage_account_name = "terraformstate18"
     container_name       = "backend"
-    key                  = "terraform.tfstate"
+    key                  = "terraform-prod.tfstate"
 
   }
 }
@@ -13,16 +13,13 @@ terraform {
 
 provider "azurerm" {
   features {}
-  client_id       = "fbc85d1a-63e6-43b1-b528-35f30e561182"
-  client_secret   = "56-8Q~fiieMS4OtiiCHRBAzXfQgrlaeq3wVTobA_"
-  tenant_id       = "62c65783-e48b-4438-8d2a-50fb84685b6e"
-  subscription_id = "dc272485-d2da-4a98-8171-00ce402c7324"
+  skip_provider_registration = true
 }
 
 
 
 module "AKS"{
-    source =  "../../modules/AKS/"       #"../modules/AKS/"
+    source =  "../../modules/AKS/"       
     resource_group_name = "$RESOURCE_GROUP"
     cluster_name = "AKS-QA"
   
@@ -31,7 +28,7 @@ module "AKS"{
 
 
 module "AKV"{
-    source = "../../modules/AKV/"       #"../modules/AKV/"
+    source = "../../modules/AKV/"       
     name = "kvdinesh007-QA"
     cluster_name = "AKS-QA"
     resource_group_name = module.AKS.resource_group_name
