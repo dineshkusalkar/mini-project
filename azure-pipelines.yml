@@ -2,8 +2,7 @@ trigger:
   batch: true
   branches:
     include:
-    -
- #  - PROD
+    - PROD
     
 
 pr: none
@@ -34,7 +33,7 @@ stages:
     - task: AzureCLI@2
       name: terraformApply
       inputs:
-        azureSubscription: 'azure'
+        azureSubscription: 'azure-sp'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
