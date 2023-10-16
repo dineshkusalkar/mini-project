@@ -19,11 +19,6 @@ provider "azurerm" {
   skip_provider_registration = true
 }
 
-provider "azuread" {
-  
-}
-
-
 module "RG"{
     source =  "../../modules/RG/"      
     resource_group_name = var.resource_group_name
