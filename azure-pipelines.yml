@@ -4,7 +4,7 @@ trigger:
   branches:
     include:
     - master
-    - QA
+ #   - QA
     
 
 pr: none
@@ -38,19 +38,14 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           cd $(System.DefaultWorkingDirectory)/$(Build.SourceBranchName)/terraform
-          echo "Hi"
+        
           export TF_VAR_user_name="$(USER_NAME)"
           export TF_VAR_user_password="$(USER_PASSWORD)"
           export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
-          echo "Dinesh"
           
           terraform init -upgrade -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
-        
-
-      
-          echo "Dinu"
-          terraform plan 
-          echo "Dmk"                
+   
+          terraform plan                 
           terraform apply --auto-approve 
           client_id=$(terraform output kubelet_identity_client_id)
           echo $client_id
