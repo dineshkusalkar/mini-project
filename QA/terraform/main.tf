@@ -19,9 +19,9 @@ provider "azurerm" {
   
 }
 
-// provider "azuread" {
+provider "azuread" {
   
-// }
+}
 
 
 module "RG"{
