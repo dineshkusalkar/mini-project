@@ -43,9 +43,9 @@ stages:
           export TF_VAR_user_password="$(USER_PASSWORD)"
           export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
           echo "Dinesh"
- #  terraform init   -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
+          terraform init   
 
-          terraform init
+      
           echo "Dinu"
           terraform plan 
           echo "Dmk"                
