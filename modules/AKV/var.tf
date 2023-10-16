@@ -4,7 +4,6 @@ variable "location" {
   default     = "eastus"
 }
 
-
 variable "name" {
   type        = string
   description = "Resources location in Azure"
@@ -19,36 +18,30 @@ variable "resource_group_name" {
 
 variable "user_name" {
   type        = string
-  
 
 }
 variable "user_password" {
   type        = string
   
-
 }
 
 variable "user_rootpassword" {
   type        = string
-  
 
 }
 
 variable "object_id" {
   type        = string
-  
-  
+   
 }
 
 variable "principal_id" {
   type        = string
- 
   
 }
 
 variable "cluster_name" {
   type        = string
-  
   
 }
 
