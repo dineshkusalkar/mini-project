@@ -10,8 +10,6 @@ terraform {
   }
 }
 
-
-
 provider "azurerm" {
   features {
     
@@ -33,8 +31,6 @@ module "AKS"{
   
 }
 
-
-
 module "AKV"{
     source = "../../modules/AKV/"      
     name = var.name
@@ -49,8 +45,6 @@ module "AKV"{
    
 
 }
-
-
 
 output "kubelet_identity_client_id" {
   value = module.AKS.kubelet_identity_client_id
