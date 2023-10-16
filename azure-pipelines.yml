@@ -43,7 +43,6 @@ stages:
           export TF_VAR_user_password="$(USER_PASSWORD)"
           export TF_VAR_user_rootpassword="$(USER_ROOTPASSWORD)"
           echo "Dinesh"
-          az login --service-principal -u $(AZURE_CLIENT_ID) -p $(AZURE_CLIENT_SECRET) --tenant $(AZURE_TENANT_ID)
           terraform init -reconfigure -backend-config="access_key=$(TF_BACKEND_ACCESS_KEY)"
    
 
