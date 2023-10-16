@@ -4,9 +4,8 @@ trigger:
   branches:
     include:
     - master
- #   - QA
+    - QA
     
-
 pr: none
 
 pool:
@@ -17,8 +16,6 @@ stages:
   displayName: 'Build Docker image'
   jobs:
   - job: BuildAndPushDocker
-    pool:
-      name: my_agents
     steps:
    
     
